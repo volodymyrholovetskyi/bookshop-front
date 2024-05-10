@@ -80,6 +80,10 @@ function App() {
                       path={`${pageURLs[pages.secretPage]}`}
                     />
                     <Route
+                        element={<SecretPage />}
+                        path={`${pageURLs[pages.secretPage]}`}
+                    />
+                    <Route
                       element={(
                         <LoginPage
                           errors={errors}
