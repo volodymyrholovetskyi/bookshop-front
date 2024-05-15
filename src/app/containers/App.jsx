@@ -19,7 +19,6 @@ import IntlProvider from '../components/IntlProvider';
 import MissedPage from '../components/MissedPage';
 import SearchParamsConfigurator from '../components/SearchParamsConfigurator';
 import OrdersPage from 'pageProviders/Orders';
-import OrderDetailsPage from 'pageProviders/OrderDetails';
 
 function App() {
   const dispatch = useDispatch();
@@ -77,10 +76,6 @@ function App() {
                     <Route
                       element={<OrdersPage />}
                       path={`${pageURLs[pages.orderPage]}`}
-                    />
-                    <Route
-                        element={<OrderDetailsPage />}
-                        path={`${pageURLs[pages.orderDetails]}`}
                     />
                     <Route
                       element={(

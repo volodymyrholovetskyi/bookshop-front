@@ -55,10 +55,7 @@ function Orders() {
     }
 
     const handleClickDeleteOrder = (id) => {
-        dispatch(actionsOrders.deleteOrder(id))
-        if (errors.length === 0) {
-            dispatch(actionsOrders.fetchOrders(filterData));
-        }
+        dispatch(actionsOrders.deleteOrder(id, filterData))
     }
 
     const handleClickDetailsOrder = (id) => {

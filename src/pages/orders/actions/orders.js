@@ -90,11 +90,14 @@ export const fetchOrder = (id) => {
             .catch((errors) => dispatch(errorReceiveOrder(errors)))
     }
 }
-export const deleteOrder = (id) => {
+export const deleteOrder = (id, search) => {
     return dispatch => {
         dispatch(requestDeleteOrder())
         return deleteById(id)
-            .then((res) => dispatch(receiveDeleteOrder(res)))
+            .then((res) => {
+                dispatch(receiveDeleteOrder(res));
+                dispatch(fetchOrders(search))
+            })
             .catch((errors) => dispatch(errorDeleteOrder(errors)))
     }
 }
