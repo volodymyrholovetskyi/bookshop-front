@@ -28,11 +28,12 @@ const initialState = {
 };
 
 const convertErrors = errors => errors.map(error => ({
-  code: error.code,
-  description: error.description,
+  code: error.status,
+  description: error.error,
 }));
 
 export default function Reducer(state = initialState, action) {
+  console.log("REDUCER")
   switch (action.type) {
     case ERROR_SIGN_IN: {
       return {
@@ -55,6 +56,7 @@ export default function Reducer(state = initialState, action) {
     case RECEIVE_USER:
     case SUCCESS_SIGN_IN: {
       const user = action.payload;
+      console.log(`RECIVE USER INNER: ${user}`)
 
       return {
         ...state,

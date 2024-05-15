@@ -1,14 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from 'react-router-dom';
-import {
-  useDispatch,
-  useSelector,
-} from 'react-redux';
-import { addAxiosInterceptors } from 'misc/requests';
+import {BrowserRouter, Route, Routes,} from 'react-router-dom';
+import {useDispatch, useSelector,} from 'react-redux';
+import {addAxiosInterceptors} from 'misc/requests';
 import * as pages from 'constants/pages';
 import AuthoritiesProvider from 'misc/providers/AuthoritiesProvider';
 import DefaultPage from 'pageProviders/Default';
@@ -25,6 +18,8 @@ import Header from '../components/Header';
 import IntlProvider from '../components/IntlProvider';
 import MissedPage from '../components/MissedPage';
 import SearchParamsConfigurator from '../components/SearchParamsConfigurator';
+import OrdersPage from 'pageProviders/Orders';
+import OrderDetailsPage from 'pageProviders/OrderDetails';
 
 function App() {
   const dispatch = useDispatch();
@@ -80,8 +75,12 @@ function App() {
                       path={`${pageURLs[pages.secretPage]}`}
                     />
                     <Route
-                        element={<SecretPage />}
-                        path={`${pageURLs[pages.secretPage]}`}
+                      element={<OrdersPage />}
+                      path={`${pageURLs[pages.orderPage]}`}
+                    />
+                    <Route
+                        element={<OrderDetailsPage />}
+                        path={`${pageURLs[pages.orderDetails]}`}
                     />
                     <Route
                       element={(
