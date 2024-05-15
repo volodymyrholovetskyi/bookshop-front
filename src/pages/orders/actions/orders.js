@@ -73,10 +73,10 @@ const findById = (id) => {
     return axios.get(`${BASE_URL}/${id}`);
 }
 
-export const fetchOrders = (search) => {
+export const fetchOrders = (filter) => {
     return dispatch => {
         dispatch(requestOrders());
-        return findOrders(search)
+        return findOrders(filter)
             .then((res) => dispatch(receiveOrders(res)))
             .catch((errors) => dispatch(errorReceiveOrders(errors)))
     };
@@ -90,13 +90,13 @@ export const fetchOrder = (id) => {
             .catch((errors) => dispatch(errorReceiveOrder(errors)))
     }
 }
-export const deleteOrder = (id, search) => {
+export const deleteOrder = (id, filter) => {
     return dispatch => {
         dispatch(requestDeleteOrder())
         return deleteById(id)
             .then((res) => {
                 dispatch(receiveDeleteOrder(res));
-                dispatch(fetchOrders(search))
+                dispatch(fetchOrders(filter))
             })
             .catch((errors) => dispatch(errorDeleteOrder(errors)))
     }

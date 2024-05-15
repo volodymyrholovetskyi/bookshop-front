@@ -78,6 +78,10 @@ function App() {
                       path={`${pageURLs[pages.orderPage]}`}
                     />
                     <Route
+                        element={<OrdersPage />}
+                        path={`${pageURLs[pages.addOrderPage]}`}
+                    />
+                    <Route
                       element={(
                         <LoginPage
                           errors={errors}

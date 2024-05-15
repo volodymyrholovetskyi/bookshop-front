@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import Loading from "../../../components/Loading";
-import AddIcon from '@mui/icons-material/Add';
+
 import {
     DialogActions,
     DialogTitle,
@@ -16,7 +15,7 @@ import {
 import Button from "../../../components/Button";
 import Dialog from "../../../components/Dialog";
 import DeleteIcon from '@mui/icons-material/Delete';
-const OrderList = ({isLoading, orders, handleDeleteOrder, errors}) => {
+const OrderList = ({orders, handleDeleteOrder}) => {
     const [open, setOpen] = useState(false);
 
     const handleCloseDialog = () => setOpen(false)
@@ -29,9 +28,6 @@ const OrderList = ({isLoading, orders, handleDeleteOrder, errors}) => {
 
     return (
         <>
-            {isLoading && <Loading/>}
-            <div className="container-table">
-                <Button variant="outlined" startIcon={<AddIcon/>}>ADD</Button>
                 <TableContainer component={Paper}>
                     <Table sx={{minWidth: 650}} size="small" aria-label="a dense table">
                         <TableHead>
@@ -74,7 +70,6 @@ const OrderList = ({isLoading, orders, handleDeleteOrder, errors}) => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-            </div>
         </>
     )
 }

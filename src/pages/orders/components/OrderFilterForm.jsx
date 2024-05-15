@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import FilterListIcon from '@mui/icons-material/FilterList';
 import Card from "../../../components/Card";
-import {IconButton, outlinedInputClasses} from "@mui/material";
+import {IconButton} from "@mui/material";
 
 const OrderFilterForm = ({handleChangeSearch, customerId, status, from, to}) => {
     const [open, setOpen] = useState(false);
@@ -16,7 +16,7 @@ const OrderFilterForm = ({handleChangeSearch, customerId, status, from, to}) => 
     return (
         <div>
             <IconButton onClick={handleClickOpenForm}><FilterListIcon></FilterListIcon></IconButton>
-            {open && <Card>
+            {open && <Card variant="outline">
                 <input type="text"
                        placeholder="Search by customerId..."
                        name={'customerId'}

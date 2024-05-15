@@ -8,10 +8,16 @@ import OrderPagination from "../components/OrderPagination";
 import useLocalStorage from "../../../misc/hooks/useLocalStorage";
 import Loading from "../../../components/Loading";
 import Error from "../../../components/icons/Error"
+import AddOrder from "../components/AddOrder";
+import Card from "../../../components/Card";
+import {useIntl} from "react-intl";
 
 const initFilterData = {
     search: {
-        customerId: 0,
+        customerId: 1,
+        status: 'NEW',
+        from: new Date(),
+        to: new Date(),
     },
     pageNumber: 0,
     size: 10
@@ -19,8 +25,10 @@ const initFilterData = {
 
 function Orders() {
     const dispatch = useDispatch();
+    const { formatMessage } = useIntl();
     const {list, totalPage, isLoading, errors} = useSelector(orders => orders);
     const [filterData, setFilterData] = useLocalStorage("filterData", initFilterData);
+    const {customerId, status, from, to} = filterData.search;
 
     const handleChangeRowsPerPage = (event) => {
         setFilterData({
@@ -54,8 +62,12 @@ function Orders() {
         }
     }
 
-    const handleClickDeleteOrder = (id) => {
+    const handleDeleteOrder = (id) => {
         dispatch(actionsOrders.deleteOrder(id, filterData))
+    }
+
+    const handleCreateOrder = (order) => {
+        // dispatch(actionsOrders.createOrder(order))
     }
 
     const handleClickDetailsOrder = (id) => {
@@ -71,28 +83,41 @@ function Orders() {
     }
 
     return (
-            <Typography>
-                <OrderFilterForm
-                    handleChangeSearch={handleChangeSearch}
-                    customerId={filterData.search.customerId}
-                    status={filterData.search.status}
-                    from={filterData.search.from}
-                    to={filterData.search.to}
-                />
+        <Typography>
+            <h2>{formatMessage({ id: 'title' })}</h2>
+            <Card variant="outline">
+                <div style={
+                    {
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                    }}>
+                    <div>
+                        <OrderFilterForm
+                            handleChangeSearch={handleChangeSearch}
+                            customerId={customerId}
+                            status={status}
+                            from={from}
+                            to={to}
+                        />
+                    </div>
+                    <div><AddOrder handleCreateOrder={handleCreateOrder}/></div>
+                </div>
                 {isLoading ? <Loading/> : <OrderList
                     orders={list}
                     isLoading={isLoading}
                     errors={errors}
-                    handleDeleteOrder={handleClickDeleteOrder}
+                    handleDeleteOrder={handleDeleteOrder}
                 />}
-                <OrderPagination
+            <OrderPagination
                     totalPage={totalPage}
                     handleClickNextPage={handleClickNextPage}
                     handleClickPrevPage={handleClickPrevPage}
                     handleChangeRowsPerPage={handleChangeRowsPerPage}
                     rowsPerPage={filterData.size}
                 />
-            </Typography>
+                </Card>
+        </Typography>
     );
 }
 
