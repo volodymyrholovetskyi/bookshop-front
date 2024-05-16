@@ -19,6 +19,7 @@ import IntlProvider from '../components/IntlProvider';
 import MissedPage from '../components/MissedPage';
 import SearchParamsConfigurator from '../components/SearchParamsConfigurator';
 import OrdersPage from 'pageProviders/Orders';
+import AddOrderPage from "pageProviders/AddOrder";
 
 function App() {
   const dispatch = useDispatch();
@@ -78,7 +79,7 @@ function App() {
                       path={`${pageURLs[pages.orderPage]}`}
                     />
                     <Route
-                        element={<OrdersPage />}
+                        element={<AddOrderPage />}
                         path={`${pageURLs[pages.addOrderPage]}`}
                     />
                     <Route

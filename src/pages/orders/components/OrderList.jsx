@@ -15,7 +15,7 @@ import {
 import Button from "../../../components/Button";
 import Dialog from "../../../components/Dialog";
 import DeleteIcon from '@mui/icons-material/Delete';
-const OrderList = ({orders, handleDeleteOrder}) => {
+const OrderList = ({orders, handleDeleteOrder, errors}) => {
     const [open, setOpen] = useState(false);
 
     const handleCloseDialog = () => setOpen(false)

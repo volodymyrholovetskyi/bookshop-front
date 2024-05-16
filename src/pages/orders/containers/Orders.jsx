@@ -8,9 +8,17 @@ import OrderPagination from "../components/OrderPagination";
 import useLocalStorage from "../../../misc/hooks/useLocalStorage";
 import Loading from "../../../components/Loading";
 import Error from "../../../components/icons/Error"
-import AddOrder from "../components/AddOrder";
+import CreateOrderForm from "../../addOrder/components/CreateOrderForm";
 import Card from "../../../components/Card";
 import {useIntl} from "react-intl";
+import {useLocation, useNavigate} from "react-router-dom"
+import Button from "../../../components/Button";
+import AddIcon from "@mui/icons-material/Add";
+import {Link} from "@mui/material";
+import IconLockOpen from "../../../components/icons/LockOpen";
+import pagesURLs from "../../../constants/pagesURLs";
+import * as pages from "../../../constants/pages";
+import * as authorities from "../../../constants/authorities";
 
 const initFilterData = {
     search: {
@@ -29,6 +37,14 @@ function Orders() {
     const {list, totalPage, isLoading, errors} = useSelector(orders => orders);
     const [filterData, setFilterData] = useLocalStorage("filterData", initFilterData);
     const {customerId, status, from, to} = filterData.search;
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    console.log("Location" + location.pathname)
+
+    const handleClickNavigation = () => {
+        navigate(`${pagesURLs[pages.addOrderPage]}`)
+    }
 
     const handleChangeRowsPerPage = (event) => {
         setFilterData({
@@ -101,7 +117,7 @@ function Orders() {
                             to={to}
                         />
                     </div>
-                    <div><AddOrder handleCreateOrder={handleCreateOrder}/></div>
+                    <div><Button onClick={handleClickNavigation} variant="outlined" startIcon={<AddIcon/>}>ADD ORDER</Button></div>
                 </div>
                 {isLoading ? <Loading/> : <OrderList
                     orders={list}
