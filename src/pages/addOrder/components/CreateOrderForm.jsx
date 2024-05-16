@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
-import Button from "../../../components/Button";
-import {Box, MenuItem, TextField} from "@mui/material";
+import React from "react";
+import {Button, MenuItem, Stack, TextField} from "@mui/material";
 
 const statuses = [
     {status: "NEW"},
@@ -8,47 +7,73 @@ const statuses = [
     {status: "CANCELED"}
 
 ]
-const CreateOrderForm = ({handleSubmit, handleInput, status, items, dateOrder}) => {
+const CreateOrderForm = ({handleSubmit, handleInput, status, items, orderDate, customerId}) => {
 
     const handleInputChange = (event) => handleInput(event)
-
     const handleClickSubmit = (event) => handleSubmit(event)
 
     return (
-        <Box component="form"
-            sx={{
-                '& .MuiTextField-root': {m: 1, width: '25ch'},
-            }}
-            noValidate
-            autoComplete="off">
-            <div>
-                <form noValidate autoComplete="off" onSubmit={handleClickSubmit}>
+        <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
+            <form noValidate autoComplete="off" onSubmit={handleClickSubmit}>
+                {/*<input*/}
+                {/*type="text"*/}
+                {/*name="items"*/}
+                {/*value={items}*/}
+                {/*onChange={handleInputChange}/>*/}
+                <Stack spacing={2} direction="column" sx={{marginBottom: 4}}>
+                    <Stack spacing={4} direction="row" sx={{marginBottom: 4}}>
+                        <TextField
+                            id="customerId"
+                            type="number"
+                            name="customerId"
+                            label="customer id"
+                            fullWidth
+                            value={customerId}
+                            variant="outlined"
+                            onChange={handleInputChange}>
+                        </TextField>
+                        <TextField
+                            id="status"
+                            select
+                            label="status"
+                            name="status"
+                            fullWidth
+                            defaultValue={status}
+                            variant="outlined"
+                            onChange={handleInputChange}>
+                            {statuses.map((option) => (
+                                <MenuItem key={option.status} value={option.status}>
+                                    {option.status}
+                                </MenuItem>))}>
+                        </TextField>
+                    </Stack>
                     <TextField
-                        id="standard-basic"
-                        select
-                        label="STATUS"
-                        name="status"
-                        defaultValue={status}
-                        onChange={handleInputChange}
-                    >
-                        {statuses.map((option) => (
-                            <MenuItem key={option.status} value={option.status}>
-                                {option.status}
-                            </MenuItem>
-                        ))}
+                        id="items"
+                        type="text"
+                        name="items"
+                        value={items}
+                        variant="outlined"
+                        label="items"
+                        onChange={handleInputChange}>
                     </TextField>
-                    <TextField type="text" name="items" id="standard-basic" value={items} label="items" onChange={handleInputChange}></TextField>
-                    <TextField type="date" name="dateOrder" id="standard-basic" value={dateOrder} onChange={handleInputChange}></TextField>
+                    <TextField
+                        id="orderDate"
+                        type="date"
+                        name="orderDate"
+                        fullWidth
+                        value={orderDate}
+                        variant="outlined"
+                        onChange={handleInputChange}>
+                    </TextField>
                     <Button
                         style={{width: "100px"}}
                         variant="contained"
-                        type="submit"
-                        onChange={handleInputChange}>
+                        type="submit">
                         SUBMIT
                     </Button>
-                </form>
-            </div>
-        </Box>
+                </Stack>
+            </form>
+        </div>
     );
 }
 

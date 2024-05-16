@@ -17,50 +17,58 @@ import actionOrder from "../actions/order"
 // }));
 
 const initOrder = {
+    customerId: 0,
     status: "NEW",
     items: [],
-    dateOrder: new Date(),
+    orderDate: "",
 }
 const AddOrder = () => {
     // const classes = useStyles();
-    const { formatMessage } = useIntl();
+    const {formatMessage} = useIntl();
     const navigate = useNavigate()
     const [error, setError] = useState();
     const [order, setOrder] = useState(initOrder);
-    const {status, items, dateOrder} = order;
+    const {status, items, orderDate, customerId} = order;
     const dispatch = useDispatch();
     const handleClickGoBack = () => navigate(-1)
     const handleSubmit = (event) => {
+        console.log("Click SUBMIT: " + order.items)
+        console.log("Click SUBMIT: " + order.orderDate)
+        console.log("Click SUBMIT: " + order.status)
+        console.log("Click SUBMIT: " + order.customerId)
         event.preventDefault();
-        if (!order.status || !order.items || !order.orderDate) {
+        if (!status || !items || !orderDate) {
             setError("Please input all field");
         } else {
+            console.log("Order: " + order)
             dispatch(actionOrder.createOrder(order))
         }
     }
 
-    const handleInput = (event) => {
-        setOrder({...order, [event.target.name]: event.target.value});
+        const handleInput = (event) => {
+            setOrder({...order, [event.target.name]: event.target.value});
+        }
+
+        return (
+            <Typography>
+                <Button
+                    style={{width: "100px", marginTop: "20px"}}
+                    variant="contained"
+                    onClick={handleClickGoBack}>
+                    GO BACK
+                </Button>
+                <h2>{formatMessage({id: 'title'})}</h2>
+                {error && <h3>{error}</h3>}
+                <CreateOrderForm
+                    handleSubmit={handleSubmit}
+                    handleInput={handleInput}
+                    status={status}
+                    items={items}
+                    orderDate={orderDate}
+                    customerId={customerId}
+                />
+            </Typography>
+        )
     }
 
-    return (
-        <Typography>
-            <Button
-                style={{width: "100px", marginTop: "20px"}}
-                variant="contained"
-                onClick={handleClickGoBack}>
-                GO BACK
-            </Button>
-            <h2>{formatMessage({ id: 'title' })}</h2>
-        <CreateOrderForm
-        handleSubmit={handleSubmit}
-        handleInput={handleInput}
-        status={status}
-        items={items}
-        dateOrder={dateOrder}
-        />
-        </Typography>
-    )
-}
-
-export default AddOrder;
+    export default AddOrder;
