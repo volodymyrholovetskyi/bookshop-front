@@ -17,9 +17,9 @@ import actionOrder from "../actions/order"
 // }));
 
 const initOrder = {
+    items: [],
     customerId: 0,
     status: "NEW",
-    items: [],
     orderDate: "",
 }
 const AddOrder = () => {
@@ -32,12 +32,8 @@ const AddOrder = () => {
     const dispatch = useDispatch();
     const handleClickGoBack = () => navigate(-1)
     const handleSubmit = (event) => {
-        console.log("Click SUBMIT: " + order.items)
-        console.log("Click SUBMIT: " + order.orderDate)
-        console.log("Click SUBMIT: " + order.status)
-        console.log("Click SUBMIT: " + order.customerId)
         event.preventDefault();
-        if (!status || !items || !orderDate) {
+        if (!status || !items || !orderDate || !customerId) {
             setError("Please input all field");
         } else {
             console.log("Order: " + order)

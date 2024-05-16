@@ -15,11 +15,6 @@ const CreateOrderForm = ({handleSubmit, handleInput, status, items, orderDate, c
     return (
         <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
             <form noValidate autoComplete="off" onSubmit={handleClickSubmit}>
-                {/*<input*/}
-                {/*type="text"*/}
-                {/*name="items"*/}
-                {/*value={items}*/}
-                {/*onChange={handleInputChange}/>*/}
                 <Stack spacing={2} direction="column" sx={{marginBottom: 4}}>
                     <Stack spacing={4} direction="row" sx={{marginBottom: 4}}>
                         <TextField
