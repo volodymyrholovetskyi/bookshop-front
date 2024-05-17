@@ -37,8 +37,8 @@ function Orders() {
     const {customerId, status, from, to} = filterOrder.search;
     const navigate = useNavigate();
 
-    const handleClickNavigation = () => {
-        navigate(`${pagesURLs[pages.addOrderPage]}`)
+    const handleClickNavigation = (pagePath) => {
+        navigate(pagePath)
     }
 
     const handleChangeRowsPerPage = (event) => {
@@ -77,10 +77,6 @@ function Orders() {
         dispatch(actionsOrders.deleteOrder(id, filterOrder))
     }
 
-    const handleClickDetailsOrder = (id) => {
-        dispatch(actionsOrders.fetchOrder(id))
-    }
-
     useEffect(() => {
         dispatch(actionsOrders.fetchOrders(filterOrder));
     }, [filterOrder]);
@@ -109,7 +105,10 @@ function Orders() {
                             to={to}
                         />
                     </div>
-                    <div><Button onClick={handleClickNavigation} variant="outlined" startIcon={<AddIcon/>}>ADD
+                    <div><Button
+                        onClick={(() => {handleClickNavigation(`${pagesURLs[pages.addOrderPage]}`)})}
+                        variant="outlined"
+                        startIcon={<AddIcon/>}>ADD
                         ORDER</Button></div>
                 </div>
                 <OrderList
@@ -117,6 +116,7 @@ function Orders() {
                     isLoading={isLoading}
                     errors={errors}
                     handleDeleteOrder={handleClickDeleteOrder}
+                    handleClickNavigation={handleClickNavigation}
                 />
                 <OrderPagination
                     totalPage={totalPage}

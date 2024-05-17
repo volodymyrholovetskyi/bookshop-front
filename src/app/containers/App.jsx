@@ -21,6 +21,7 @@ import SearchParamsConfigurator from '../components/SearchParamsConfigurator';
 import OrdersPage from 'pageProviders/Orders';
 import Orders from "../../pages/orders/containers/Orders";
 import NewOrder from "../../pages/orders/containers/NewOrder";
+import OrderDetails from "../../pages/orders/containers/OrderDetails";
 function App() {
   const dispatch = useDispatch();
   const [state, setState] = useState({
@@ -79,6 +80,7 @@ function App() {
                       path={'/'}>
                       <Route path={`${pageURLs[pages.orderPage]}`} element={<Orders/>}></Route>
                       <Route path={`${pageURLs[pages.addOrderPage]}`} element={<NewOrder/>}></Route>
+                      <Route path={`${pageURLs[pages.orderDetails]}`} element={<OrderDetails/>}></Route>
                     </Route>
 
                     <Route

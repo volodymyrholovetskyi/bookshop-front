@@ -8,7 +8,7 @@ import actionOrder from "../actions/addOrder"
 import OrderForm from "../components/OrderForm";
 
 const initOrder = {
-    items: [],
+    items: ["Java JDBC"],
     customerId: 0,
     status: "NEW",
     orderDate: new Date(),

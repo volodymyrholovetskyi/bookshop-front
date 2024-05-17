@@ -15,7 +15,10 @@ import {
 import Button from "../../../components/Button";
 import Dialog from "../../../components/Dialog";
 import DeleteIcon from '@mui/icons-material/Delete';
-const OrderList = ({orders, handleDeleteOrder, isLoading, errors}) => {
+import Hover from '../../../components/Hover'
+import pagesURLs from "../../../constants/pagesURLs";
+import * as pages from "../../../constants/pages";
+const OrderList = ({orders, handleDeleteOrder, errors, handleClickNavigation}) => {
     const [open, setOpen] = useState(false);
 
     const handleCloseDialog = () => setOpen(false)
@@ -44,13 +47,16 @@ const OrderList = ({orders, handleDeleteOrder, isLoading, errors}) => {
                             {orders.map((order) => (
                                 <TableRow key={order.id}
                                           sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                                    <Hover
+                                        onClick={(() => {handleClickNavigation(`${pagesURLs[pages.orderDetails]}`)})}>
                                     <TableCell>{order.id}</TableCell>
                                     <TableCell>{order.status}</TableCell>
                                     <TableCell>{order.totalProduct}</TableCell>
                                     <TableCell>{order.orderDate}</TableCell>
                                     <TableCell><IconButton
                                         onClick={handleClickOpenDialog}><DeleteIcon/></IconButton></TableCell>
-                                    <Dialog
+                                    </Hover>
+                                        <Dialog
                                         open={open}
                                         aria-labelledby="alert-dialog-title"
                                         aria-describedby="alert-dialog-description"
