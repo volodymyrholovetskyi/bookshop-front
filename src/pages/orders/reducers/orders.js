@@ -10,6 +10,7 @@ import {
   RECEIVE_ORDER
 } from '../constans/actionType';
 import list from "../../../misc/constants/languages";
+import {ERROR_ADD_ORDER, REQUEST_ADD_ORDER, RESPONSE_ADD_ORDER} from "../constans/actionType";
 
 const initialState = {
   list: [],
@@ -17,6 +18,7 @@ const initialState = {
   isLoading: false,
   isReceive: false,
   errors: [],
+  order: {}
 };
 
 const convertErrors = (errors) => errors.map(error => ({
@@ -90,6 +92,32 @@ export default function Reducer(state = initialState, action) {
         ...state,
         isLoading: true,
         isError: false
+      };
+    }
+
+    case ERROR_ADD_ORDER: {
+      return {
+        ...state,
+        errors: convertErrors(action.payload),
+        isLoading: false,
+        isReceive: false,
+        isError: true
+      };
+    }
+    case REQUEST_ADD_ORDER: {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false
+      };
+    }
+
+    case RESPONSE_ADD_ORDER: {
+      return {
+        ...state,
+        order: action.payload || initialState.order,
+        isLoading: false,
+        isReceive: true,
       };
     }
 

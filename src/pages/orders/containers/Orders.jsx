@@ -6,21 +6,17 @@ import {useDispatch, useSelector} from "react-redux";
 import OrderFilterForm from "../components/OrderFilterForm";
 import OrderPagination from "../components/OrderPagination";
 import useLocalStorage from "../../../misc/hooks/useLocalStorage";
-import Loading from "../../../components/Loading";
 import Error from "../../../components/icons/Error"
-import CreateOrderForm from "../../addOrder/components/CreateOrderForm";
 import Card from "../../../components/Card";
 import {useIntl} from "react-intl";
-import {useLocation, useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import Button from "../../../components/Button";
 import AddIcon from "@mui/icons-material/Add";
-import {Link} from "@mui/material";
-import IconLockOpen from "../../../components/icons/LockOpen";
 import pagesURLs from "../../../constants/pagesURLs";
 import * as pages from "../../../constants/pages";
-import * as authorities from "../../../constants/authorities";
+import Loading from "../../../components/Loading";
 
-const initFilterData = {
+const initFilterOrder = {
     search: {
         customerId: 1,
         status: 'NEW',
@@ -31,32 +27,31 @@ const initFilterData = {
     size: 10
 }
 
+// const initNewOrder
+
 function Orders() {
     const dispatch = useDispatch();
-    const { formatMessage } = useIntl();
+    const {formatMessage} = useIntl();
     const {list, totalPage, isLoading, errors} = useSelector(orders => orders);
-    const [filterData, setFilterData] = useLocalStorage("filterData", initFilterData);
-    const {customerId, status, from, to} = filterData.search;
+    const [filterOrder, setFilterOrder] = useLocalStorage("filterOrder", initFilterOrder);
+    const {customerId, status, from, to} = filterOrder.search;
     const navigate = useNavigate();
-    const location = useLocation();
-
-    console.log("Location" + location.pathname)
 
     const handleClickNavigation = () => {
         navigate(`${pagesURLs[pages.addOrderPage]}`)
     }
 
     const handleChangeRowsPerPage = (event) => {
-        setFilterData({
-            ...filterData, size: event.target.value
+        setFilterOrder({
+            ...filterOrder, size: event.target.value
         })
     };
 
     const handleChangeSearch = (event) => {
-        setFilterData({
-            ...filterData,
+        setFilterOrder({
+            ...filterOrder,
             search: {
-                ...filterData.search,
+                ...filterOrder.search,
                 [event.target.name]: event.target.value
             }
         });
@@ -64,26 +59,22 @@ function Orders() {
 
     const handleClickNextPage = () => {
         if (list.length !== 0) {
-            setFilterData({
-                ...filterData, pageNumber: filterData.pageNumber + 1
+            setFilterOrder({
+                ...filterOrder, pageNumber: filterOrder.pageNumber + 1
             });
         }
     }
 
     const handleClickPrevPage = () => {
-        if (filterData.pageNumber !== 0) {
-            setFilterData({
-                ...filterData, pageNumber: filterData.pageNumber - 1
+        if (filterOrder.pageNumber !== 0) {
+            setFilterOrder({
+                ...filterOrder, pageNumber: filterOrder.pageNumber - 1
             });
         }
     }
 
-    const handleDeleteOrder = (id) => {
-        dispatch(actionsOrders.deleteOrder(id, filterData))
-    }
-
-    const handleCreateOrder = (order) => {
-        // dispatch(actionsOrders.createOrder(order))
+    const handleClickDeleteOrder = (id) => {
+        dispatch(actionsOrders.deleteOrder(id, filterOrder))
     }
 
     const handleClickDetailsOrder = (id) => {
@@ -91,8 +82,8 @@ function Orders() {
     }
 
     useEffect(() => {
-        dispatch(actionsOrders.fetchOrders(filterData));
-    }, [filterData]);
+        dispatch(actionsOrders.fetchOrders(filterOrder));
+    }, [filterOrder]);
 
     if (errors.length > 0) {
         return <Error/>
@@ -100,8 +91,9 @@ function Orders() {
 
     return (
         <Typography>
-            <h2>{formatMessage({ id: 'title' })}</h2>
-            <Card variant="outline">
+            <h2>{formatMessage({id: 'title'})}</h2>
+            {isLoading && <Loading/>}
+            {!isLoading && <Card variant="outline">
                 <div style={
                     {
                         display: "flex",
@@ -117,22 +109,23 @@ function Orders() {
                             to={to}
                         />
                     </div>
-                    <div><Button onClick={handleClickNavigation} variant="outlined" startIcon={<AddIcon/>}>ADD ORDER</Button></div>
+                    <div><Button onClick={handleClickNavigation} variant="outlined" startIcon={<AddIcon/>}>ADD
+                        ORDER</Button></div>
                 </div>
-                {isLoading ? <Loading/> : <OrderList
+                <OrderList
                     orders={list}
                     isLoading={isLoading}
                     errors={errors}
-                    handleDeleteOrder={handleDeleteOrder}
-                />}
-            <OrderPagination
+                    handleDeleteOrder={handleClickDeleteOrder}
+                />
+                <OrderPagination
                     totalPage={totalPage}
                     handleClickNextPage={handleClickNextPage}
                     handleClickPrevPage={handleClickPrevPage}
                     handleChangeRowsPerPage={handleChangeRowsPerPage}
-                    rowsPerPage={filterData.size}
+                    rowsPerPage={filterOrder.size}
                 />
-                </Card>
+            </Card>}
         </Typography>
     );
 }

@@ -19,8 +19,8 @@ import IntlProvider from '../components/IntlProvider';
 import MissedPage from '../components/MissedPage';
 import SearchParamsConfigurator from '../components/SearchParamsConfigurator';
 import OrdersPage from 'pageProviders/Orders';
-import AddOrderPage from "pageProviders/AddOrder";
-
+import Orders from "../../pages/orders/containers/Orders";
+import NewOrder from "../../pages/orders/containers/NewOrder";
 function App() {
   const dispatch = useDispatch();
   const [state, setState] = useState({
@@ -75,13 +75,12 @@ function App() {
                       path={`${pageURLs[pages.secretPage]}`}
                     />
                     <Route
-                      element={<OrdersPage />}
-                      path={`${pageURLs[pages.orderPage]}`}
-                    />
-                    <Route
-                        element={<AddOrderPage />}
-                        path={`${pageURLs[pages.addOrderPage]}`}
-                    />
+                      element={<OrdersPage />}>
+                      path={'/'}>
+                      <Route path={`${pageURLs[pages.orderPage]}`} element={<Orders/>}></Route>
+                      <Route path={`${pageURLs[pages.addOrderPage]}`} element={<NewOrder/>}></Route>
+                    </Route>
+
                     <Route
                       element={(
                         <LoginPage

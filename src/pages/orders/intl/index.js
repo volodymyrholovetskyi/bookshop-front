@@ -1,5 +1,6 @@
-import languages from 'misc/constants/languages';
-import mixMessages from 'misc/intl/messages';
+import mixMessages from "../../../misc/intl/messages";
+import languages from "../../../misc/constants/languages";
+
 const DEFAULT_LANG = languages.en;
 
 function getMessages(lang) {

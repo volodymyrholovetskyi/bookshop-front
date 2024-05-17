@@ -15,7 +15,7 @@ import {
 import Button from "../../../components/Button";
 import Dialog from "../../../components/Dialog";
 import DeleteIcon from '@mui/icons-material/Delete';
-const OrderList = ({orders, handleDeleteOrder, errors}) => {
+const OrderList = ({orders, handleDeleteOrder, isLoading, errors}) => {
     const [open, setOpen] = useState(false);
 
     const handleCloseDialog = () => setOpen(false)
@@ -28,7 +28,7 @@ const OrderList = ({orders, handleDeleteOrder, errors}) => {
 
     return (
         <>
-                <TableContainer component={Paper}>
+            <TableContainer component={Paper}>
                     <Table sx={{minWidth: 650}} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
