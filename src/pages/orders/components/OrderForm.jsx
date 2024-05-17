@@ -24,7 +24,7 @@ const OrderForm = ({handleSubmit, handleInput, status, items, orderDate, custome
                                 id="customerId"
                                 type="number"
                                 name="customerId"
-                                label="customer id"
+                                label="Customer ID"
                                 fullWidth
                                 value={customerId}
                                 variant="outlined"
@@ -33,7 +33,7 @@ const OrderForm = ({handleSubmit, handleInput, status, items, orderDate, custome
                             <TextField
                                 id="status"
                                 select
-                                label="status"
+                                label="Select a Status"
                                 name="status"
                                 fullWidth
                                 defaultValue={status}
@@ -51,7 +51,7 @@ const OrderForm = ({handleSubmit, handleInput, status, items, orderDate, custome
                             name="items"
                             value={items}
                             variant="outlined"
-                            label="items"
+                            label="ITEMS"
                             onChange={handleInputChange}>
                         </TextField>
                         <TextField

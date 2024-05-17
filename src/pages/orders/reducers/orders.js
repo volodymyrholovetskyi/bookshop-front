@@ -1,10 +1,9 @@
 import {
-  ERROR_RECEIVE_ORDERS,
-  REQUEST_ORDERS,
-  RECEIVE_ORDERS,
+  ERROR_RECEIVE_ORDER_LIST,
+  REQUEST_ORDER_LIST,
+  RECEIVE_ORDER_LIST,
   ERROR_DELETE_ORDER,
   REQUEST_DELETE_ORDER,
-  RECEIVE_DELETE_ORDER,
   ERROR_RECEIVE_ORDER,
   REQUEST_ORDER,
   RECEIVE_ORDER,
@@ -29,7 +28,7 @@ const convertErrors = (errors) => errors.map(error => ({
 
 export default function Reducer(state = initialState, action) {
   switch (action.type) {
-    case ERROR_RECEIVE_ORDERS: {
+    case ERROR_RECEIVE_ORDER_LIST: {
       return {
         ...state,
         errors: convertErrors(action.payload),
@@ -38,14 +37,14 @@ export default function Reducer(state = initialState, action) {
 
       };
     }
-    case REQUEST_ORDERS: {
+    case REQUEST_ORDER_LIST: {
       return {
         ...state,
         isLoading: true,
       };
     }
 
-    case RECEIVE_ORDERS: {
+    case RECEIVE_ORDER_LIST: {
       const {list, totalPage} = action.payload;
       return {
         ...state,

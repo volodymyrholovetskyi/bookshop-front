@@ -6,13 +6,12 @@ import {
 import axios from "axios";
 import config from "../../../config";
 
+const requestAddOrder = () => ({
+    type: REQUEST_ADD_ORDER,
+});
 const responseAddOrder = (res) => ({
     payload: res,
     type: RESPONSE_ADD_ORDER,
-});
-
-const requestAddOrder = () => ({
-    type: REQUEST_ADD_ORDER,
 });
 
 const errorAddOrder = (errors) => ({
@@ -24,7 +23,6 @@ const addOrder = (order) => {
     const {
         ORDER_API_URL,
     } = config;
-    console.log("Add order")
     return axios.post(`${ORDER_API_URL}`, order);
 }
 

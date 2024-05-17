@@ -4,7 +4,7 @@ import Typography from "../../../components/Typography";
 import {useDispatch, useSelector} from "react-redux";
 import OrderInfo from "../components/OrderInfo";
 import Loading from "../../../components/Loading";
-import actionsOrders from "../actions/orders"
+import actionsOrders from "../actions/orderDetails"
 import {useIntl} from "react-intl";
 import Button from "../../../components/Button";
 

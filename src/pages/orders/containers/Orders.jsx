@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
 import Typography from 'components/Typography';
 import OrderList from "../components/OrderList";
-import actionsOrders from "../actions/orders"
+import actionsOrders from "../actions/orderList"
+import actionsDeleteOrder from "../actions/deleteOrder"
 import {useDispatch, useSelector} from "react-redux";
 import OrderFilterForm from "../components/OrderFilterForm";
 import OrderPagination from "../components/OrderPagination";
@@ -74,11 +75,11 @@ function Orders() {
     }
 
     const handleClickDeleteOrder = (id) => {
-        dispatch(actionsOrders.deleteOrder(id, filterOrder))
+        dispatch(actionsDeleteOrder.deleteOrder(id, filterOrder))
     }
 
     useEffect(() => {
-        dispatch(actionsOrders.fetchOrders(filterOrder));
+        dispatch(actionsOrders.fetchOrderList(filterOrder));
     }, [filterOrder]);
 
     if (errors.length > 0) {
