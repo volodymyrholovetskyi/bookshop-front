@@ -22,10 +22,10 @@ const errorAddOrder = (errors) => ({
 
 const addOrder = (order) => {
     const {
-        BASE_URL,
+        ORDER_API_URL,
     } = config;
     console.log("Add order")
-    return axios.post(`${BASE_URL}`, order);
+    return axios.post(`${ORDER_API_URL}`, order);
 }
 
 export const createOrder = (order) => {

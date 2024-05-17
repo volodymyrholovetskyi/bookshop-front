@@ -7,10 +7,11 @@ import {
   RECEIVE_DELETE_ORDER,
   ERROR_RECEIVE_ORDER,
   REQUEST_ORDER,
-  RECEIVE_ORDER
+  RECEIVE_ORDER,
+  ERROR_ADD_ORDER,
+  REQUEST_ADD_ORDER,
+  RESPONSE_ADD_ORDER
 } from '../constans/actionType';
-import list from "../../../misc/constants/languages";
-import {ERROR_ADD_ORDER, REQUEST_ADD_ORDER, RESPONSE_ADD_ORDER} from "../constans/actionType";
 
 const initialState = {
   list: [],
@@ -73,7 +74,7 @@ export default function Reducer(state = initialState, action) {
     case RECEIVE_ORDER: {
       return {
         ...state,
-        list: action.payload || initialState.list,
+        order: action.payload || initialState.order,
         isLoading: false,
         isReceive: true,
       };

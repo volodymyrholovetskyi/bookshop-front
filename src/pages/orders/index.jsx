@@ -2,8 +2,6 @@ import React, { useMemo } from 'react';
 import IntlProvider from 'misc/providers/IntlProvider';
 import useLocationSearch from 'misc/hooks/useLocationSearch';
 import getMessages from './intl';
-import Orders from "./containers/Orders";
-import NewOrder from "./containers/NewOrder";
 import {Outlet} from "react-router-dom";
 
 

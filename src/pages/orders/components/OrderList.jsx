@@ -16,8 +16,7 @@ import Button from "../../../components/Button";
 import Dialog from "../../../components/Dialog";
 import DeleteIcon from '@mui/icons-material/Delete';
 import Hover from '../../../components/Hover'
-import pagesURLs from "../../../constants/pagesURLs";
-import * as pages from "../../../constants/pages";
+
 const OrderList = ({orders, handleDeleteOrder, errors, handleClickNavigation}) => {
     const [open, setOpen] = useState(false);
 
@@ -28,6 +27,8 @@ const OrderList = ({orders, handleDeleteOrder, errors, handleClickNavigation}) =
         setOpen(false)
     }
     const handleClickOpenDialog = () => setOpen(true)
+
+    const handleClickOrderDetails = (pagePath) => handleClickNavigation(pagePath);
 
     return (
         <>
@@ -47,8 +48,7 @@ const OrderList = ({orders, handleDeleteOrder, errors, handleClickNavigation}) =
                             {orders.map((order) => (
                                 <TableRow key={order.id}
                                           sx={{'&:last-child td, &:last-child th': {border: 0}}}>
-                                    <Hover
-                                        onClick={(() => {handleClickNavigation(`${pagesURLs[pages.orderDetails]}`)})}>
+                                    <Hover onClick={(() => {handleClickOrderDetails(`/orders/${order.id}`)})}>
                                     <TableCell>{order.id}</TableCell>
                                     <TableCell>{order.status}</TableCell>
                                     <TableCell>{order.totalProduct}</TableCell>

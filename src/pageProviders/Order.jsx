@@ -1,5 +1,4 @@
 import * as authorities from 'constants/authorities';
-import OrderPage from 'pages/orders';
 import React from 'react';
 
 import PageAccessValidator from './components/PageAccessValidator';
@@ -11,13 +10,14 @@ import {Outlet} from "react-router-dom";
 
 const store = configureStore(rootReducer);
 
-const Orders = (props) => {
+const Order = (props) => {
 
     return (
         <PageAccessValidator
             neededAuthorities={[
                 authorities.ENABLE_SEE_ORDER_PAGE,
-                authorities.ENABLE_SEE_ADD_ORDER_PAGE]}>
+                authorities.ENABLE_SEE_ADD_ORDER_PAGE,
+                authorities.ENABLE_SEE_ORDER_DETAILS_PAGE]}>
             <PageContainer>
                 <Provider store={store}>
                     <Outlet {...props}></Outlet>
@@ -27,4 +27,4 @@ const Orders = (props) => {
     );
 };
 
-export default Orders;
+export default Order;

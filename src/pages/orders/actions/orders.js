@@ -54,23 +54,23 @@ const errorDeleteOrder = (errors) => ({
 
 const findOrders = (search) => {
     const {
-        BASE_URL,
+        ORDER_API_URL,
     } = config;
-    return axios.post(`${BASE_URL}/_list`, search);
+    return axios.post(`${ORDER_API_URL}/_list`, search);
 };
 
 const deleteById = (id) => {
     const {
-        BASE_URL,
+        ORDER_API_URL,
     } = config;
-    return axios.delete(`${BASE_URL}/${id}`);
+    return axios.delete(`${ORDER_API_URL}/${id}`);
 }
 
 const findById = (id) => {
     const {
-        BASE_URL,
+        ORDER_API_URL,
     } = config;
-    return axios.get(`${BASE_URL}/${id}`);
+    return axios.get(`${ORDER_API_URL}/${id}`);
 }
 
 export const fetchOrders = (filter) => {

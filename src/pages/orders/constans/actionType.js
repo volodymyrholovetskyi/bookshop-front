@@ -1,4 +1,4 @@
-// Orders
+// Order
 export const ERROR_RECEIVE_ORDERS = 'ERROR_RECEIVE_ORDERS';
 export const ERROR_RECEIVE_ORDER = 'ERROR_RECEIVE_ORDER';
 export const REQUEST_ORDERS = 'REQUEST_ORDERS';

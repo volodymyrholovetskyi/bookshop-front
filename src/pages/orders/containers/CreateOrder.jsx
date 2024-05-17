@@ -8,12 +8,12 @@ import actionOrder from "../actions/addOrder"
 import OrderForm from "../components/OrderForm";
 
 const initOrder = {
-    items: ["Java JDBC"],
+    items: [],
     customerId: 0,
-    status: "NEW",
-    orderDate: new Date(),
+    status: "",
+    orderDate: "",
 }
-const NewOrder = () => {
+const CreateOrder = () => {
     const {formatMessage} = useIntl();
     const navigate = useNavigate()
     const {isLoading} = useSelector(orders => orders)
@@ -58,4 +58,4 @@ const NewOrder = () => {
     )
 }
 
-export default NewOrder;
+export default CreateOrder;

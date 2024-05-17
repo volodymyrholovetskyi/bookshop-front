@@ -108,8 +108,8 @@ function Orders() {
                     <div><Button
                         onClick={(() => {handleClickNavigation(`${pagesURLs[pages.addOrderPage]}`)})}
                         variant="outlined"
-                        startIcon={<AddIcon/>}>ADD
-                        ORDER</Button></div>
+                        startIcon={<AddIcon/>}>
+                        ADD ORDER</Button></div>
                 </div>
                 <OrderList
                     orders={list}
