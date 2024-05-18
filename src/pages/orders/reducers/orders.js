@@ -22,7 +22,7 @@ const initialState = {
 };
 
 const convertErrors = (errors) => errors.map(error => ({
-  code: error.statusCode,
+  code: error.status,
   description: error.message,
 }));
 
@@ -83,14 +83,12 @@ export default function Reducer(state = initialState, action) {
         errors: convertErrors(action.payload),
         isLoading: false,
         isReceive: false,
-        isError: true
       };
     }
     case REQUEST_DELETE_ORDER: {
       return {
         ...state,
         isLoading: true,
-        isError: false
       };
     }
 
@@ -100,14 +98,12 @@ export default function Reducer(state = initialState, action) {
         errors: convertErrors(action.payload),
         isLoading: false,
         isReceive: false,
-        isError: true
       };
     }
     case REQUEST_ADD_ORDER: {
       return {
         ...state,
         isLoading: true,
-        isError: false
       };
     }
 

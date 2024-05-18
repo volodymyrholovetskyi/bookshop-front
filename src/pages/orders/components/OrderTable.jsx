@@ -1,18 +1,20 @@
 import React, {useState} from 'react';
 import {
+    Box,
     Button,
     Dialog,
     DialogActions,
-    DialogTitle,
-    IconButton,
+    DialogTitle, Fade,
+    IconButton, Modal,
     Paper,
     Table,
     TableBody,
     TableCell,
     TableContainer,
     TablePagination,
-    TableRow,
+    TableRow, Typography,
 } from "@mui/material";
+import Backdrop from '@mui/material/Backdrop';
 import DeleteIcon from '@mui/icons-material/Delete'
 import PlagiarismOutlinedIcon from '@mui/icons-material/PlagiarismOutlined';
 import Loading from "../../../components/Loading";
@@ -21,6 +23,19 @@ import OrderFilterForm from "./OrderFilterForm";
 import pagesURLs from "../../../constants/pagesURLs";
 import * as pages from "../../../constants/pages";
 import AddIcon from "@mui/icons-material/Add";
+import * as PropTypes from "prop-types";
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    background: '#ddffdd',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
 
 const columns = [
     {id: 'id', name: 'Id'},
@@ -30,6 +45,15 @@ const columns = [
     {id: 'details', name: 'Details'},
     {id: 'action', name: 'Actions'},
 ]
+
+function ModalContent(props) {
+    return null;
+}
+
+ModalContent.propTypes = {
+    sx: PropTypes.shape({width: PropTypes.number}),
+    children: PropTypes.node
+};
 const OrderTable =
     ({
          orders,
@@ -50,14 +74,19 @@ const OrderTable =
          to,
      }) => {
         const [open, setOpen] = useState(false);
+        const [showModal, setShowModal] = useState(false);
         const [id, setId] = useState(0);
         const handleClickCancelDelete = () => setOpen(false)
         const handleClickOpenDialog = () => setOpen(true)
 
         const handleClickConfirmDelete = () => {
             handleDeleteOrder(id)
-            setOpen(false)
+            if (!errors.length) {
+                setOpen(false);
+                setShowModal(true)
+            }
         }
+        const handleClose = () => setShowModal(false)
 
         const handleClickOrderDetails = (pagePath) => {
             handleClickNavigation(pagePath)
@@ -122,9 +151,11 @@ const OrderTable =
                                             aria-labelledby="alert-dialog-title"
                                             aria-describedby="alert-dialog-description">
                                         <DialogTitle id="alert-dialog-title">
-                                            {"Do you want to delete the order?"}
+                                            {"Do you want to delete the Order?"}
                                         </DialogTitle>
-                                        <DialogTitle>{errors}</DialogTitle>
+                                        {errors && errors.map((error) => (
+                                            <DialogTitle>{error}</DialogTitle>
+                                        ))}
                                         <DialogActions>
                                             <Button onClick={handleClickCancelDelete}>No</Button>
                                             <Button onClick={handleClickConfirmDelete} autoFocus>Yes</Button>
@@ -144,6 +175,29 @@ const OrderTable =
                     />
                 </TableContainer>
                 }
+                <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    open={showModal}
+                    onClose={handleClose}
+                    closeAfterTransition
+                    slots={{ backdrop: Backdrop }}
+                    slotProps={{
+                        backdrop: {
+                            timeout: 500,
+                        },
+                    }}>
+                    <Fade in={showModal}>
+                        <Box sx={style}>
+                            <Typography id="transition-modal-title" variant="h6" component="h2">
+                                Success!
+                            </Typography>
+                            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                                Order with ID: [ {id} ] has bean deleted.
+                            </Typography>
+                        </Box>
+                    </Fade>
+                </Modal>
             </div>
         )
     }
