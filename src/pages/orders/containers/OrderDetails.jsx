@@ -26,13 +26,6 @@ const OrderDetails = () => {
 
     return (
         <Typography>
-            <Button
-                style={{width: "100px", marginTop: "20px"}}
-                variant="contained"
-                onClick={handleClickGoBack}>
-                GO BACK
-            </Button>
-            <h2>{formatMessage({id: 'title'})}</h2>
             <OrderInfo
                     id={id}
                     customerId={customerId}
@@ -41,6 +34,8 @@ const OrderDetails = () => {
                     orderDate={orderDate}
                     isLoading={isLoading}
                     isReceive={isReceive}
+                    title={formatMessage({id: 'title'})}
+                    handleClickGoBack={handleClickGoBack}
                 />
         </Typography>
     );

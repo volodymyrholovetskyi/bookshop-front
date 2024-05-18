@@ -27,7 +27,6 @@ const CreateOrder = () => {
         if (!status || !items || !orderDate || !customerId) {
             setError("Please input all field");
         } else {
-            console.log("CREATE")
             dispatch(actionOrder.createOrder(order))
         }
     }
@@ -39,13 +38,6 @@ const CreateOrder = () => {
 
     return (
         <Typography>
-            <Button
-                style={{width: "100px", marginTop: "20px"}}
-                variant="contained"
-                onClick={handleClickGoBack}>
-                GO BACK
-            </Button>
-            <h2>{formatMessage({id: 'title'})}</h2>
             <AddOrderForm
                 handleSubmit={handleSubmit}
                 handleInput={handleInput}
@@ -55,6 +47,8 @@ const CreateOrder = () => {
                 customerId={customerId}
                 isLoading={isLoading}
                 error={error}
+                title={formatMessage({id: 'title'})}
+                handleClickGoBack={handleClickGoBack}
             />
         </Typography>
     )
