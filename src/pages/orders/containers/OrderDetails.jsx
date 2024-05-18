@@ -10,7 +10,7 @@ import Button from "../../../components/Button";
 
 const OrderDetails = () => {
     const {formatMessage} = useIntl();
-    const {order, isLoading} = useSelector(orders => orders);
+    const {order, isLoading, isReceive} = useSelector(orders => orders);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {customerId, status, orderDate, items} = order;
@@ -21,6 +21,7 @@ const OrderDetails = () => {
     const handleClickGoBack = () => navigate(-1)
 
     useEffect(() => {
+        console.log("Fetch")
         dispatch(actionsOrders.fetchOrder(id))
     }, [])
 
@@ -33,16 +34,15 @@ const OrderDetails = () => {
                 GO BACK
             </Button>
             <h2>{formatMessage({id: 'title'})}</h2>
-            {isLoading && <Loading/>}
-            {!isLoading &&
-                <OrderInfo
+            <OrderInfo
                     id={id}
                     customerId={customerId}
                     status={status}
                     items={items}
                     orderDate={orderDate}
+                    isLoading={isLoading}
+                    isReceive={isReceive}
                 />
-            }
         </Typography>
     );
 }

@@ -14,11 +14,11 @@ import {
 
 const initialState = {
   list: [],
-  totalPage: 0,
+  order: {},
+  totalOrders: 0,
   isLoading: false,
   isReceive: false,
   errors: [],
-  order: {}
 };
 
 const convertErrors = (errors) => errors.map(error => ({
@@ -34,7 +34,6 @@ export default function Reducer(state = initialState, action) {
         errors: convertErrors(action.payload),
         isLoading: false,
         isReceive: false,
-
       };
     }
     case REQUEST_ORDER_LIST: {
@@ -45,11 +44,11 @@ export default function Reducer(state = initialState, action) {
     }
 
     case RECEIVE_ORDER_LIST: {
-      const {list, totalPage} = action.payload;
+      const {list, totalOrders} = action.payload;
       return {
         ...state,
         list: list || initialState.list,
-        totalPage: totalPage || initialState.totalPage,
+        totalOrders: totalOrders || initialState.totalOrders,
         isLoading: false,
         isReceive: true,
       };
@@ -73,7 +72,7 @@ export default function Reducer(state = initialState, action) {
     case RECEIVE_ORDER: {
       return {
         ...state,
-        order: action.payload || initialState.order,
+        order: action.payload,
         isLoading: false,
         isReceive: true,
       };

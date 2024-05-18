@@ -5,7 +5,7 @@ import {Typography} from "@mui/material";
 import {useIntl} from "react-intl";
 import {useDispatch, useSelector} from "react-redux";
 import actionOrder from "../actions/addOrder"
-import OrderForm from "../components/OrderForm";
+import AddOrderForm from "../components/AddOrderForm";
 
 const initOrder = {
     items: [],
@@ -44,7 +44,7 @@ const CreateOrder = () => {
                 GO BACK
             </Button>
             <h2>{formatMessage({id: 'title'})}</h2>
-            <OrderForm
+            <AddOrderForm
                 handleSubmit={handleSubmit}
                 handleInput={handleInput}
                 status={status}

@@ -8,13 +8,13 @@ const statuses = [
     {status: "CANCELED"}
 
 ]
-const OrderForm = ({handleSubmit, handleInput, status, items, orderDate, customerId, isLoading, error}) => {
+const AddOrderForm = ({handleSubmit, handleInput, status, items, orderDate, customerId, isLoading, error}) => {
 
     const handleInputChange = (event) => handleInput(event)
     const handleClickSubmit = (event) => handleSubmit(event)
 
     return (
-        <>
+        <div>
             {isLoading && <Loading/>}
             {!isLoading && <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
                 <form noValidate autoComplete="off" onSubmit={handleClickSubmit}>
@@ -72,8 +72,8 @@ const OrderForm = ({handleSubmit, handleInput, status, items, orderDate, custome
                     </Stack>
                 </form>
             </div>}
-        </>
+        </div>
     );
 }
 
-export default OrderForm;
+export default AddOrderForm;

@@ -29,9 +29,9 @@ const menuItems = [
     },
     {
         icon: <IconLockOpen/>,
-        link: `${pagesURLs[pages.orderPage]}`,
+        link: `${pagesURLs[pages.orderListPage]}`,
         neededAuthorities: [authorities.ENABLE_SEE_ORDER_PAGE],
-        titleIntlId: `page.${pages.orderPage}`
+        titleIntlId: `page.${pages.orderListPage}`
     }
 ];
 

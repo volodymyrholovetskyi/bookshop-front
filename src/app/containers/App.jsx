@@ -19,7 +19,7 @@ import IntlProvider from '../components/IntlProvider';
 import MissedPage from '../components/MissedPage';
 import SearchParamsConfigurator from '../components/SearchParamsConfigurator';
 import OrderPage from 'pageProviders/Order';
-import Orders from "../../pages/orders/containers/Orders";
+import OrderList from "../../pages/orders/containers/OrderList";
 import CreateOrder from "../../pages/orders/containers/CreateOrder";
 import OrderDetails from "../../pages/orders/containers/OrderDetails";
 function App() {
@@ -78,7 +78,7 @@ function App() {
                     <Route
                       element={<OrderPage />}>
                       path={''}>
-                      <Route path={`${pageURLs[pages.orderPage]}`} element={<Orders/>}></Route>
+                      <Route path={`${pageURLs[pages.orderListPage]}`} element={<OrderList/>}></Route>
                       <Route path={`${pageURLs[pages.addOrderPage]}`} element={<CreateOrder/>}></Route>
                       <Route path={`${pageURLs[pages.orderDetails]}`} element={<OrderDetails/>}></Route>
                     </Route>
