@@ -21,7 +21,6 @@ const OrderDetails = () => {
     const handleClickGoBack = () => navigate(-1)
 
     useEffect(() => {
-        console.log("Fetch")
         dispatch(actionsOrders.fetchOrder(id))
     }, [])
 

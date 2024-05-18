@@ -8,7 +8,7 @@ import actionOrder from "../actions/addOrder"
 import AddOrderForm from "../components/AddOrderForm";
 
 const initOrder = {
-    items: [],
+    items: "",
     customerId: 0,
     status: "",
     orderDate: "",
@@ -27,12 +27,14 @@ const CreateOrder = () => {
         if (!status || !items || !orderDate || !customerId) {
             setError("Please input all field");
         } else {
+            console.log("CREATE")
             dispatch(actionOrder.createOrder(order))
         }
     }
 
     const handleInput = (event) => {
-        setOrder({...order, [event.target.name]: event.target.value});
+        let { name, value } = event.target;
+        setOrder({...order, [name]: value});
     }
 
     return (

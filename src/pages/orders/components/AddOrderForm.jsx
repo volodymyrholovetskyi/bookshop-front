@@ -51,7 +51,7 @@ const AddOrderForm = ({handleSubmit, handleInput, status, items, orderDate, cust
                             name="items"
                             value={items}
                             variant="outlined"
-                            label="ITEMS"
+                            label="Items"
                             onChange={handleInputChange}>
                         </TextField>
                         <TextField

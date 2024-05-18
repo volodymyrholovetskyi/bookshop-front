@@ -14,6 +14,7 @@ import {
     TableRow,
 } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete'
+import PlagiarismOutlinedIcon from '@mui/icons-material/PlagiarismOutlined';
 import Loading from "../../../components/Loading";
 import TableHeads from "../../../components/TableHeads";
 import OrderFilterForm from "./OrderFilterForm";
@@ -26,7 +27,8 @@ const columns = [
     {id: 'status', name: 'Status'},
     {id: 'totalProduct', name: 'Total product'},
     {id: 'orderDate', name: 'Order date'},
-    {id: 'action', name: 'Action'},
+    {id: 'details', name: 'Details'},
+    {id: 'action', name: 'Actions'},
 ]
 const OrderTable =
     ({
@@ -48,15 +50,18 @@ const OrderTable =
          to,
      }) => {
         const [open, setOpen] = useState(false);
-        const handleCloseDialog = () => setOpen(false)
+        const [id, setId] = useState(0);
+        const handleClickCancelDelete = () => setOpen(false)
+        const handleClickOpenDialog = () => setOpen(true)
 
-        const handleClickDeleteOrder = (id) => {
+        const handleClickConfirmDelete = () => {
             handleDeleteOrder(id)
             setOpen(false)
         }
-        const handleClickOpenDialog = () => setOpen(true)
 
-        const handleClickOrderDetails = (pagePath) => handleClickNavigation(pagePath);
+        const handleClickOrderDetails = (pagePath) => {
+            handleClickNavigation(pagePath)
+        };
 
         return (
             <div>
@@ -89,34 +94,44 @@ const OrderTable =
                         <TableHeads columns={columns}></TableHeads>
                         <TableBody>
                             {orders && orders.map((order) => (
-                                <TableRow style={{cursor: 'pointer'}} hover key={order.id} onClick={(() => {
-                                    handleClickOrderDetails(`/orders/${order.id}`)
-                                })}
-                                          sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                                <TableRow
+                                    hover
+                                    key={order.id}
+                                    sx={{'&:last-child td, &:last-child th': {border: 0}}}>
                                     <TableCell>{order.id}</TableCell>
                                     <TableCell>{order.status}</TableCell>
                                     <TableCell>{order.totalProduct}</TableCell>
                                     <TableCell>{order.orderDate}</TableCell>
-                                    <TableCell><IconButton
-                                        onClick={handleClickOpenDialog}><DeleteIcon/></IconButton></TableCell>
-                                    <Dialog
-                                        open={open}
-                                        aria-labelledby="alert-dialog-title"
-                                        aria-describedby="alert-dialog-description"
-                                    >
+                                    <TableCell>
+                                        <IconButton
+                                            onClick={(() => {
+                                                handleClickOrderDetails(`/orders/${order.id}`)
+                                            })}>
+                                            <PlagiarismOutlinedIcon/>
+                                        </IconButton>
+                                    </TableCell>
+                                    <TableCell>
+                                        <IconButton onClick={() => {
+                                            handleClickOpenDialog()
+                                            setId(order.id)
+                                        }}>
+                                            <DeleteIcon/>
+                                        </IconButton>
+                                    </TableCell>
+                                    <Dialog open={open}
+                                            aria-labelledby="alert-dialog-title"
+                                            aria-describedby="alert-dialog-description">
                                         <DialogTitle id="alert-dialog-title">
                                             {"Do you want to delete the order?"}
                                         </DialogTitle>
-                                        {errors.length > 0 && <DialogTitle>{errors}</DialogTitle>}
+                                        <DialogTitle>{errors}</DialogTitle>
                                         <DialogActions>
-                                            <Button onClick={handleCloseDialog}>No</Button>
-                                            <Button onClick={(() => handleClickDeleteOrder(order.id))}
-                                                    autoFocus>Yes</Button>
+                                            <Button onClick={handleClickCancelDelete}>No</Button>
+                                            <Button onClick={handleClickConfirmDelete} autoFocus>Yes</Button>
                                         </DialogActions>
                                     </Dialog>
                                 </TableRow>
                             ))}
-
                         </TableBody>
                     </Table>
                     <TablePagination
