@@ -21,11 +21,11 @@ const initFilterOrder = {
 
 function OrderList() {
     const dispatch = useDispatch();
-    const {formatMessage} = useIntl();
-    const {list, totalOrders, isLoading, errors} = useSelector(orders => orders);
-    const [filterOrder, setFilterOrder] = useLocalStorage("filterOrder", initFilterOrder);
-    const {customerId, status, from, to} = filterOrder.search;
-    const {pageNumber, size} = filterOrder;
+    const { formatMessage } = useIntl();
+    const { list, totalOrders, isLoading, errors } = useSelector(orders => orders);
+    const [ filterOrder, setFilterOrder ] = useLocalStorage("filterOrder", initFilterOrder);
+    const { customerId, status, from, to } = filterOrder.search;
+    const { pageNumber, size } = filterOrder;
     const navigate = useNavigate();
 
     const handleClickNavigation = (pagePath) => {
