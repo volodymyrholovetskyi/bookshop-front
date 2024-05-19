@@ -46,14 +46,6 @@ const columns = [
     {id: 'action', name: 'Actions'},
 ]
 
-function ModalContent(props) {
-    return null;
-}
-
-ModalContent.propTypes = {
-    sx: PropTypes.shape({width: PropTypes.number}),
-    children: PropTypes.node
-};
 const OrderTable =
     ({
          orders,
@@ -95,8 +87,7 @@ const OrderTable =
         return (
             <div>
                 <h2>{title}</h2>
-                <div style={
-                    {
+                <div style={{
                         display: "flex",
                         flexDirection: "row",
                         justifyContent: "space-between",
