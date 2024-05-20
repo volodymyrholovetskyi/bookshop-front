@@ -1,9 +1,54 @@
 
 .buttonSubmit {
-    width: 100px;
+    padding: 10px 20px;
+    border: none;
+    background: #4f6bf8;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background .3s;
 }
 
-.buttonGoBack {
-    width: 100px;
+.buttonSubmit:hover {
+    background: #334ad2;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin-top: 20px;
+    border-radius: 25px;
+}
+
+.createFormBox {
+    margin-bottom: 20px;
+}
+
+.createFormBox input, select {
+    padding: 16px 20px;
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.createFormBox label {
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.createForm {
+    padding: 20px;
+}
+
+.errorMsg {
+    color: 	#ff9966;
+}
+
+.title {
+    text-align: center;
 }

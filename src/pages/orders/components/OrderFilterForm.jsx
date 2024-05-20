@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import FilterListIcon from '@mui/icons-material/FilterList';
-import Card from "../../../components/Card";
+import styles from '../styles/OrderList.module.css'
 import {IconButton} from "@mui/material";
 
 const OrderFilterForm = ({handleChangeSearch, customerId, status, from, to}) => {
@@ -14,31 +14,44 @@ const OrderFilterForm = ({handleChangeSearch, customerId, status, from, to}) => 
     }
 
     return (
-        <div>
+        <>
             <IconButton onClick={handleClickOpenForm}><FilterListIcon></FilterListIcon></IconButton>
-            {open && <Card variant="outline">
-                <input type="text"
-                       placeholder="Search by customerId..."
-                       name={'customerId'}
-                       value={customerId}
-                       onChange={onChangeSearch}/>
-                <input type="text"
-                       placeholder="Search by status..."
-                       value={status}
-                       name={'status'}
-                       onChange={onChangeSearch}/>
-                <input type="date"
-                       placeholder="Select data start..."
-                       value={from}
-                       name={'from'}
-                       onChange={onChangeSearch}/>
-                <input type="date"
-                       placeholder="Select data end..."
-                       value={to}
-                       name={'to'}
-                       onChange={onChangeSearch}/>
-            </Card>}
-        </div>
+            {open && <div className={styles.filterFormContainer}>
+                <h2>Search by:</h2>
+                <div className={styles.filterFormBox}>
+                    <label>Customer ID: </label>
+                    <input type="number"
+                           name={'customerId'}
+                           value={customerId}
+                           onChange={onChangeSearch}/>
+                </div>
+                <div className={styles.filterFormBox}>
+                    <label>Select a Status: </label>
+                    <select name="status"
+                            value={status}
+                            onChange={onChangeSearch}>
+                        <option value={"NEW"}>NEW</option>
+                        <option value={"PAID"}>PAID</option>
+                        <option value={"SHIPPED"}>SHIPPED</option>
+                        <option value={"CANCELED"}>CANCELED</option>
+                    </select>
+                </div>
+                <div className={styles.filterFormBox}>
+                    <label>Date from: </label>
+                    <input type="date"
+                           value={from}
+                           name={'from'}
+                           onChange={onChangeSearch}/>
+                </div>
+                <div className={styles.filterFormBox}>
+                    <label>Date to: </label>
+                    <input type="date"
+                           value={to}
+                           name={'to'}
+                           onChange={onChangeSearch}/>
+                </div>
+            </div>}
+        </>
     );
 }
 

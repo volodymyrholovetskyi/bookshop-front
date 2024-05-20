@@ -1,16 +1,15 @@
 import React, {useEffect} from 'react'
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import Typography from "../../../components/Typography";
 import {useDispatch, useSelector} from "react-redux";
 import OrderInfo from "../components/OrderInfo";
-import Loading from "../../../components/Loading";
 import actionsOrders from "../actions/orderDetails"
 import {useIntl} from "react-intl";
-import Button from "../../../components/Button";
+import styles from "../styles/OrderList.module.css";
 
 const OrderDetails = () => {
     const {formatMessage} = useIntl();
-    const {order, isLoading, isReceive} = useSelector(orders => orders);
+    const {order, isLoading, errors} = useSelector(orders => orders);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {customerId, status, orderDate, items} = order;
@@ -33,8 +32,8 @@ const OrderDetails = () => {
                     items={items}
                     orderDate={orderDate}
                     isLoading={isLoading}
-                    isReceive={isReceive}
-                    title={formatMessage({id: 'title'})}
+                    errors={errors}
+                    title={formatMessage({id: 'titleOrderDetails'})}
                     handleClickGoBack={handleClickGoBack}
                 />
         </Typography>

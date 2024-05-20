@@ -4,6 +4,7 @@ import Loading from "../../../components/Loading";
 import TableHeads from "../../../components/TableHeads";
 import Button from "../../../components/Button";
 import styles from '../styles/OrderDetails.module.css'
+import Error from "../../../components/icons/Error";
 
 const columns = [
     {id: 'id', name: 'Id'},
@@ -20,9 +21,18 @@ const OrderInfo =
          orderDate,
          items,
          isLoading,
+         errors,
          title,
          handleClickGoBack,
      }) => {
+
+        if (errors.length > 0) {
+            return (
+                <div>
+                    {errors.map((error) => (
+                        <Error color="warning">{error}</Error>
+                    ))}
+                </div>)}
 
         return (
             <div>

@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {
     Box,
-    Button,
     DialogActions,
     DialogTitle,
     Fade,
@@ -27,6 +26,7 @@ import AddIcon from "@mui/icons-material/Add";
 import Pagination from "../../../components/Pagination";
 import Dialog from "../../../components/Dialog";
 import styles from '../styles/OrderList.module.css'
+import Button from "../../../components/Button";
 
 const columns = [
     {id: 'id', name: 'Id'},
@@ -41,10 +41,10 @@ const OrderTable =
     ({
          orders,
          title,
-         errors,
          handleDeleteOrder,
          handleClickNavigation,
          isLoading,
+         errors,
          page,
          rowsPerPage,
          handleChangePage,
@@ -78,7 +78,7 @@ const OrderTable =
         return (
             <div>
                 <h2>{title}</h2>
-                <div className={styles.containerTable}>
+                <div className={styles.filterBox}>
                     <div>
                         <OrderFilterForm
                             handleChangeSearch={handleChangeSearch}
@@ -87,13 +87,15 @@ const OrderTable =
                             from={from}
                             to={to}/>
                     </div>
-                    <div><Button
-                        onClick={(() => {
-                            handleClickNavigation(`${pagesURLs[pages.addOrderPage]}`)
-                        })}
-                        variant="outlined"
-                        startIcon={<AddIcon/>}>
-                        ADD ORDER</Button></div>
+                    <div>
+                        <Button
+                            onClick={(() => {
+                                handleClickNavigation(`${pagesURLs[pages.addOrderPage]}`)
+                            })}
+                            variant="outlined"
+                            startIcon={<AddIcon/>}>
+                            ADD ORDER</Button>
+                    </div>
                 </div>
                 {isLoading && <Loading/>}
                 {!isLoading && <TableContainer component={Paper}>
@@ -178,7 +180,7 @@ const OrderTable =
                     </Fade>
                 </Modal>
             </div>
-        )
+        );
     }
 
 export default OrderTable;

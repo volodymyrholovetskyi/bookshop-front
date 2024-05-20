@@ -28,8 +28,8 @@ const initialState = {
 };
 
 const convertErrors = errors => errors.map(error => ({
-  code: error.status,
-  description: error.error,
+  code: error.code,
+  description: error.description,
 }));
 
 export default function Reducer(state = initialState, action) {

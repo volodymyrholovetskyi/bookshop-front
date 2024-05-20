@@ -59,7 +59,11 @@ function OrderList() {
     }
 
     useEffect(() => {
-        dispatch(actionsOrders.fetchOrderList(filterOrder));
+        const delay = setTimeout(() => {
+            dispatch(actionsOrders.fetchOrderList(filterOrder));
+        }, 500);
+
+        return () => clearTimeout(delay);
     }, [filterOrder]);
 
     return (

@@ -4,10 +4,11 @@
     font-size: 20px;
 }
 
-.containerTable {
+.filterBox {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .boxModal {
@@ -19,4 +20,36 @@
     background: #ddffdd;
     border: 2px solid #000;
     padding: 20px 40px;
+}
+
+.filterBox {
+    display: flex;
+    flex-direction: row;
+}
+
+.filterFormContainer {
+    display: flex;
+    flex-direction: column;
+    background: #d2d2d2;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.filterFormBox input, select {
+    padding: 10px 20px;
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.filterFormBox {
+    margin: 10px;
+}
+
+.filterFormBox label {
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 10px;
 }
