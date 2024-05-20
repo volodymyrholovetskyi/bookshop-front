@@ -2,17 +2,18 @@ import React, {useState} from 'react';
 import {
     Box,
     Button,
-    Dialog,
     DialogActions,
-    DialogTitle, Fade,
-    IconButton, Modal,
+    DialogTitle,
+    Fade,
+    IconButton,
+    Modal,
     Paper,
     Table,
     TableBody,
     TableCell,
     TableContainer,
-    TablePagination,
-    TableRow, Typography,
+    TableRow,
+    Typography,
 } from "@mui/material";
 import Backdrop from '@mui/material/Backdrop';
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -23,7 +24,8 @@ import OrderFilterForm from "./OrderFilterForm";
 import pagesURLs from "../../../constants/pagesURLs";
 import * as pages from "../../../constants/pages";
 import AddIcon from "@mui/icons-material/Add";
-import * as PropTypes from "prop-types";
+import Pagination from "../../../components/Pagination";
+import Dialog from "../../../components/Dialog";
 
 const style = {
     position: 'absolute',
@@ -88,10 +90,10 @@ const OrderTable =
             <div>
                 <h2>{title}</h2>
                 <div style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                    }}>
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                }}>
                     <div>
                         <OrderFilterForm
                             handleChangeSearch={handleChangeSearch}
@@ -138,7 +140,8 @@ const OrderTable =
                                             <DeleteIcon/>
                                         </IconButton>
                                     </TableCell>
-                                    <Dialog open={open}
+                                    <Dialog
+                                        open={open}
                                             aria-labelledby="alert-dialog-title"
                                             aria-describedby="alert-dialog-description">
                                         <DialogTitle id="alert-dialog-title">
@@ -156,14 +159,13 @@ const OrderTable =
                             ))}
                         </TableBody>
                     </Table>
-                    <TablePagination
-                        component="div"
-                        count={totalOrders}
+                    <Pagination
+                        totalElements={totalOrders}
                         page={page}
-                        onPageChange={handleChangePage}
+                        handleChangePage={handleChangePage}
                         rowsPerPage={rowsPerPage}
-                        onRowsPerPageChange={handleChangeRowsPerPage}
-                    />
+                        handleChangeRowsPerPage={handleChangeRowsPerPage}
+                    ></Pagination>
                 </TableContainer>
                 }
                 <Modal
@@ -172,7 +174,7 @@ const OrderTable =
                     open={showModal}
                     onClose={handleClose}
                     closeAfterTransition
-                    slots={{ backdrop: Backdrop }}
+                    slots={{backdrop: Backdrop}}
                     slotProps={{
                         backdrop: {
                             timeout: 500,
@@ -183,7 +185,7 @@ const OrderTable =
                             <Typography id="transition-modal-title" variant="h6" component="h2">
                                 Success!
                             </Typography>
-                            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                            <Typography id="transition-modal-description" sx={{mt: 2}}>
                                 Order with ID: [ {id} ] has bean deleted.
                             </Typography>
                         </Box>

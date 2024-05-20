@@ -1,52 +1,27 @@
 import React, {useState} from "react";
-import Button from "../../../components/Button";
 import {useNavigate} from "react-router-dom";
 import {Typography} from "@mui/material";
 import {useIntl} from "react-intl";
 import {useDispatch, useSelector} from "react-redux";
 import actionOrder from "../actions/addOrder"
-import AddOrderForm from "../components/AddOrderForm";
+import CreateOrderForm from "../components/CreateOrderForm";
 
-const initOrder = {
-    items: "",
-    customerId: 0,
-    status: "",
-    orderDate: "",
-}
 const CreateOrder = () => {
     const {formatMessage} = useIntl();
     const navigate = useNavigate()
     const {isLoading} = useSelector(orders => orders)
-    const [error, setError] = useState();
-    const [order, setOrder] = useState(initOrder);
-    let {status, items, orderDate, customerId} = order;
     const dispatch = useDispatch();
     const handleClickGoBack = () => navigate(-1)
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        if (!status || !items || !orderDate || !customerId) {
-            setError("Please input all field");
-        } else {
-            dispatch(actionOrder.createOrder(order))
-        }
-    }
 
-    const handleInput = (event) => {
-        let { name, value } = event.target;
-        setOrder({...order, [name]: value});
+    const onSubmit = (order) => {
+        dispatch(actionOrder.createOrder(order))
     }
 
     return (
         <Typography>
-            <AddOrderForm
-                handleSubmit={handleSubmit}
-                handleInput={handleInput}
-                status={status}
-                items={items}
-                orderDate={orderDate}
-                customerId={customerId}
+            <CreateOrderForm
+                onSubmit={onSubmit}
                 isLoading={isLoading}
-                error={error}
                 title={formatMessage({id: 'title'})}
                 handleClickGoBack={handleClickGoBack}
             />
