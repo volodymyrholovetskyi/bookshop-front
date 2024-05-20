@@ -3,6 +3,7 @@ import {Paper, Table, TableBody, TableCell, TableContainer, TableRow} from "@mui
 import Loading from "../../../components/Loading";
 import TableHeads from "../../../components/TableHeads";
 import Button from "../../../components/Button";
+import styles from '../styles/OrderDetails.module.css'
 
 const columns = [
     {id: 'id', name: 'Id'},
@@ -26,7 +27,7 @@ const OrderInfo =
         return (
             <div>
                 <Button
-                    style={{width: "100px", marginTop: "20px"}}
+                    className={styles.buttonGoBack}
                     variant="contained"
                     onClick={handleClickGoBack}>
                     GO BACK

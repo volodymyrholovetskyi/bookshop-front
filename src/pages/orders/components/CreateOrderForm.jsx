@@ -2,6 +2,7 @@ import React from "react";
 import {Button} from "@mui/material";
 import {useForm} from "react-hook-form";
 import Loading from "../../../components/Loading";
+import styles from '../styles/CreateOrderForm.module.css'
 
 const CreateOrderForm =
     ({
@@ -16,7 +17,7 @@ const CreateOrderForm =
         return (
             <div>
                 <Button
-                    style={{width: "100px", marginTop: "20px"}}
+                    className={styles.buttonGoBack}
                     variant="contained"
                     onClick={handleClickGoBack}>
                     GO BACK
@@ -56,7 +57,7 @@ const CreateOrderForm =
                             <p>Order date is required.</p>)}
                     </div>
                     <button
-                        style={{width: "100px"}}
+                        className={styles.buttonSubmit}
                         type="submit">
                         SUBMIT
                     </button>

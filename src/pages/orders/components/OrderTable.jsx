@@ -26,18 +26,7 @@ import * as pages from "../../../constants/pages";
 import AddIcon from "@mui/icons-material/Add";
 import Pagination from "../../../components/Pagination";
 import Dialog from "../../../components/Dialog";
-
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    background: '#ddffdd',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
+import styles from '../styles/OrderList.module.css'
 
 const columns = [
     {id: 'id', name: 'Id'},
@@ -89,11 +78,7 @@ const OrderTable =
         return (
             <div>
                 <h2>{title}</h2>
-                <div style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                }}>
+                <div className={styles.containerTable}>
                     <div>
                         <OrderFilterForm
                             handleChangeSearch={handleChangeSearch}
@@ -142,8 +127,8 @@ const OrderTable =
                                     </TableCell>
                                     <Dialog
                                         open={open}
-                                            aria-labelledby="alert-dialog-title"
-                                            aria-describedby="alert-dialog-description">
+                                        aria-labelledby="alert-dialog-title"
+                                        aria-describedby="alert-dialog-description">
                                         <DialogTitle id="alert-dialog-title">
                                             {"Do you want to delete the Order?"}
                                         </DialogTitle>
@@ -159,6 +144,7 @@ const OrderTable =
                             ))}
                         </TableBody>
                     </Table>
+                    {!orders.length && <p className={styles.emptyTableMsg}>Nothing found. Please use filtering...</p>}
                     <Pagination
                         totalElements={totalOrders}
                         page={page}
@@ -181,7 +167,7 @@ const OrderTable =
                         },
                     }}>
                     <Fade in={showModal}>
-                        <Box sx={style}>
+                        <Box className={styles.boxModal}>
                             <Typography id="transition-modal-title" variant="h6" component="h2">
                                 Success!
                             </Typography>

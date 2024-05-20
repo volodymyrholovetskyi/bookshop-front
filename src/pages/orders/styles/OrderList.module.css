@@ -1,0 +1,22 @@
+.emptyTableMsg {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.containerTable {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.boxModal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: #ddffdd;
+    border: 2px solid #000;
+    padding: 20px 40px;
+}
