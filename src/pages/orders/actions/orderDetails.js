@@ -4,7 +4,6 @@ import {
     REQUEST_ORDER} from "../constans/actionType";
 import axios from "axios";
 import config from "../../../config";
-import {deleteOrder, fetchOrderList} from "./orderList";
 
 const requestOrderDetails = () => ({
     type: REQUEST_ORDER,

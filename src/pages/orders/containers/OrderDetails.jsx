@@ -5,8 +5,6 @@ import {useDispatch, useSelector} from "react-redux";
 import OrderInfo from "../components/OrderInfo";
 import actionsOrders from "../actions/orderDetails"
 import {useIntl} from "react-intl";
-import styles from "../styles/OrderList.module.css";
-import actionsDeleteOrder from "../actions/deleteOrder";
 import actionsUpdateOrder from "../actions/updateOrder";
 
 const OrderDetails = () => {
