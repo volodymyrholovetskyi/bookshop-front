@@ -9,7 +9,10 @@ import {
   RECEIVE_ORDER,
   ERROR_ADD_ORDER,
   REQUEST_ADD_ORDER,
-  RESPONSE_ADD_ORDER
+  RESPONSE_ADD_ORDER,
+  ERROR_UPDATE_ORDER,
+  REQUEST_UPDATE_ORDER,
+  RESPONSE_UPDATE_ORDER
 } from '../constans/actionType';
 
 const initialState = {
@@ -116,6 +119,30 @@ export default function Reducer(state = initialState, action) {
       };
     }
 
+
+    case ERROR_UPDATE_ORDER: {
+      return {
+        ...state,
+        errors: convertErrors(action.payload),
+        isLoading: false,
+        isReceive: false,
+      };
+    }
+    case REQUEST_UPDATE_ORDER: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+
+    case RESPONSE_UPDATE_ORDER: {
+      return {
+        ...state,
+        order: action.payload || initialState.order,
+        isLoading: false,
+        isReceive: true,
+      };
+    }
     default: {
       return state;
     }
