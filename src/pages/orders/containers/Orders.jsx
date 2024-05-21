@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import Typography from 'components/Typography';
-import OrderTable from "../components/OrderTable";
+import OrderList from "../components/OrderList";
 import actionsOrders from "../actions/orderList"
 import actionsDeleteOrder from "../actions/deleteOrder"
 import {useDispatch, useSelector} from "react-redux";
@@ -11,15 +11,15 @@ import {useNavigate} from "react-router-dom"
 const initFilterOrder = {
     search: {
         customerId: 0,
-        status: '',
-        from: '',
-        to: '',
+        status: 'NEW',
+        from: new Date(),
+        to: new Date(),
     },
     pageNumber: 0,
     size: 10
 }
 
-function OrderList() {
+function Orders() {
     const dispatch = useDispatch();
     const { formatMessage } = useIntl();
     const { list, totalOrders, isLoading, errors } = useSelector(orders => orders);
@@ -68,7 +68,7 @@ function OrderList() {
 
     return (
         <Typography>
-            <OrderTable
+            <OrderList
                 title={formatMessage({id: 'title'})}
                 orders={list}
                 errors={errors}
@@ -90,4 +90,4 @@ function OrderList() {
     );
 }
 
-export default OrderList;
+export default Orders;

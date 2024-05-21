@@ -1,4 +1,10 @@
 .buttonGoBack {
     width: 100px;
     margin-top: 20px;
+    text-transform: uppercase;
+}
+
+.buttonBox {
+    display: flex;
+    justify-content: space-between;
 }

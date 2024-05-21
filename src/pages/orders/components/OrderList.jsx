@@ -19,7 +19,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import PlagiarismOutlinedIcon from '@mui/icons-material/PlagiarismOutlined';
 import Loading from "../../../components/Loading";
 import TableHeads from "../../../components/TableHeads";
-import OrderFilterForm from "./OrderFilterForm";
+import OrderFilter from "./OrderFilter";
 import pagesURLs from "../../../constants/pagesURLs";
 import * as pages from "../../../constants/pages";
 import AddIcon from "@mui/icons-material/Add";
@@ -37,7 +37,7 @@ const columns = [
     {id: 'action', name: 'Actions'},
 ]
 
-const OrderTable =
+const OrderList =
     ({
          orders,
          title,
@@ -80,7 +80,7 @@ const OrderTable =
                 <h2>{title}</h2>
                 <div className={styles.filterBox}>
                     <div>
-                        <OrderFilterForm
+                        <OrderFilter
                             handleChangeSearch={handleChangeSearch}
                             customerId={customerId}
                             status={status}
@@ -183,4 +183,4 @@ const OrderTable =
         );
     }
 
-export default OrderTable;
+export default OrderList;

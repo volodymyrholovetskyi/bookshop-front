@@ -6,6 +6,8 @@ import OrderInfo from "../components/OrderInfo";
 import actionsOrders from "../actions/orderDetails"
 import {useIntl} from "react-intl";
 import styles from "../styles/OrderList.module.css";
+import actionsDeleteOrder from "../actions/deleteOrder";
+import actionsUpdateOrder from "../actions/updateOrder";
 
 const OrderDetails = () => {
     const {formatMessage} = useIntl();
@@ -18,6 +20,10 @@ const OrderDetails = () => {
     const id = getId(location.pathname)
 
     const handleClickGoBack = () => navigate(-1)
+
+    const handleUpdateOrder = (id, order) => {
+        dispatch(actionsUpdateOrder.updateOrder(id, order))
+    }
 
     useEffect(() => {
         dispatch(actionsOrders.fetchOrder(id))
@@ -35,6 +41,7 @@ const OrderDetails = () => {
                     errors={errors}
                     title={formatMessage({id: 'titleOrderDetails'})}
                     handleClickGoBack={handleClickGoBack}
+                    handleUpdateOrder={handleUpdateOrder}
                 />
         </Typography>
     );

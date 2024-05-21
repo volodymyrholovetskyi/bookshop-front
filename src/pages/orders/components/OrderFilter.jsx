@@ -3,7 +3,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import styles from '../styles/OrderList.module.css'
 import {IconButton} from "@mui/material";
 
-const OrderFilterForm = ({handleChangeSearch, customerId, status, from, to}) => {
+const OrderFilter = ({handleChangeSearch, customerId, status, from, to}) => {
     const [open, setOpen] = useState(false);
 
     const handleClickOpenForm = () => {
@@ -55,4 +55,4 @@ const OrderFilterForm = ({handleChangeSearch, customerId, status, from, to}) => 
     );
 }
 
-export default OrderFilterForm;
+export default OrderFilter;

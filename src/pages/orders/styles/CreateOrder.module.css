@@ -1,16 +1,33 @@
+.buttonBox {
+    display: flex;
+    justify-content: space-evenly;
+}
 
-.buttonSubmit {
+.btn {
     padding: 10px 20px;
     border: none;
-    background: #4f6bf8;
     color: white;
     border-radius: 5px;
     cursor: pointer;
+    text-transform: uppercase;
+}
+
+.createButton {
+    background: #4f6bf8;
     transition: background .3s;
 }
 
-.buttonSubmit:hover {
+.createButton:hover {
     background: #334ad2;
+}
+
+.cancelButton {
+    background: #ff9966;
+    transition: background .3s;
+}
+
+.cancelButton:hover {
+    background: #fc7c3b;
 }
 
 .container {

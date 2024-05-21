@@ -1,18 +1,17 @@
 import React from "react";
-import Button from "../../../components/Button";
 import {useForm} from "react-hook-form";
 import Loading from "../../../components/Loading";
-import styles from '../styles/CreateOrderForm.module.css'
+import styles from '../styles/CreateOrder.module.css'
 import Typography from "../../../components/Typography";
 import Error from "../../../components/icons/Error";
 
-const CreateOrderForm =
+const AddOrder =
     ({
          onSubmit,
          isLoading,
          fetchErrors,
          title,
-         handleClickGoBack,
+         handleCancel,
      }) => {
 
         const {register, handleSubmit, formState: {errors}} = useForm();
@@ -23,20 +22,16 @@ const CreateOrderForm =
                     {errors.map((error) => (
                         <Error color="warning">{error}</Error>
                     ))}
-                </div>)}
+                </div>)
+        }
 
         return (
             <Typography>
-                <Button
-                    variant="contained"
-                    onClick={handleClickGoBack}>
-                    GO BACK
-                </Button>
                 <div className={styles.container}>
                     <h2 className={styles.title}>{title}</h2>
                     {isLoading && <Loading/>}
                     {!isLoading &&
-                        <form className={styles.createForm} onSubmit={handleSubmit(onSubmit)}>
+                        <form className={styles.createForm} onSubmit={handleSubmit(onSubmit)} onReset={handleCancel}>
                             <div className={styles.createFormBox}>
                                 <label>Customer ID: </label>
                                 <input type="number" defaultValue={0} {...register("customerId", {
@@ -74,11 +69,18 @@ const CreateOrderForm =
                                 {errors.orderDate && errors.orderDate.type === "required" && (
                                     <p className={styles.errorMsg}>Order date is required.</p>)}
                             </div>
-                            <button
-                                className={styles.buttonSubmit}
-                                type="submit">
-                                SUBMIT
-                            </button>
+                            <div className={styles.buttonBox}>
+                                <button
+                                    className={`${styles.btn} ${styles.createButton}`}
+                                    type="submit">
+                                    create
+                                </button>
+                                <button
+                                    className={`${styles.btn} ${styles.cancelButton}`}
+                                    type="reset">
+                                    cancel
+                                </button>
+                            </div>
                         </form>
                     }
                 </div>
@@ -86,4 +88,4 @@ const CreateOrderForm =
         );
     }
 
-export default CreateOrderForm;
+export default AddOrder;
