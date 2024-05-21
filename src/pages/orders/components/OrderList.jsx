@@ -67,6 +67,7 @@ const OrderList =
             if (!errors.length) {
                 setOpen(false);
                 setShowModal(true)
+                modalDaly(setShowModal, 2000)
             }
         }
         const handleClose = () => setShowModal(false)
@@ -182,5 +183,12 @@ const OrderList =
             </div>
         );
     }
+const modalDaly = (setShowModal, daly) => {
+    const delay = setTimeout(() => {
+        setShowModal(false);
+    }, daly);
+
+    return () => clearTimeout(delay);
+}
 
 export default OrderList;
