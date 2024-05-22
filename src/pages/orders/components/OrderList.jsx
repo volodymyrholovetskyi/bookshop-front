@@ -12,7 +12,6 @@ import {
     TableCell,
     TableContainer,
     TableRow,
-    Typography,
 } from "@mui/material";
 import Backdrop from '@mui/material/Backdrop';
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -23,6 +22,7 @@ import Pagination from "../../../components/Pagination";
 import Dialog from "../../../components/Dialog";
 import styles from '../styles/OrderList.module.css'
 import Button from "../../../components/Button";
+import Typography from "../../../components/Typography";
 
 const columns = [
     {id: 'id', name: 'Id'},
@@ -48,7 +48,7 @@ const OrderList =
      }) => {
         const [open, setOpen] = useState(false);
         const [showModal, setShowModal] = useState(false);
-        let id = "addOrder";
+        let id = 0;
         const handleClickCancelDelete = () => setOpen(false)
         const handleClickOpenDialog = () => setOpen(true)
 
@@ -68,14 +68,24 @@ const OrderList =
 
         return (
             <div>
-                <h2>{title}</h2>
-                <button onClick={(() => {handleClickNavigation(`/orders/${id}`)})}>
-                    add order</button>
-                {isLoading && <Loading/>}
-                {!isLoading && <TableContainer component={Paper}>
+                <TableContainer component={Paper}>
+                    <Typography>
+                        <div className={styles.headerBox}>
+                            <h2>{title}</h2>
+                            <div>
+                                <button
+                                    className={styles.addButton}
+                                    onClick={(() => {
+                                        handleClickNavigation(`/orders/addOrder`)
+                                    })}>add order
+                                </button>
+                            </div>
+                        </div>
+                    </Typography>
                     <Table sx={{minWidth: 650}} size="small" aria-label="a dense table">
                         <TableHeads columns={columns}></TableHeads>
-                        <TableBody>
+                        {isLoading && <Loading/>}
+                        {!isLoading && <TableBody>
                             {orders && orders.map((order) => (
                                 <TableRow
                                     hover
@@ -118,6 +128,7 @@ const OrderList =
                                 </TableRow>
                             ))}
                         </TableBody>
+                        }
                     </Table>
                     {!orders.length && <p className={styles.emptyTableMsg}>Nothing found. Please use filtering...</p>}
                     <Pagination
@@ -128,7 +139,6 @@ const OrderList =
                         handleChangeRowsPerPage={handleChangeRowsPerPage}
                     ></Pagination>
                 </TableContainer>
-                }
                 <Modal
                     aria-labelledby="transition-modal-title"
                     aria-describedby="transition-modal-description"
