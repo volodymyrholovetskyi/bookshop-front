@@ -12,7 +12,7 @@ const OrderDetails = () => {
     const {order, isLoading, errors} = useSelector(orders => orders);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {customerId, status, orderDate, items} = order;
+    const {customerId, status, orderDate, grossValue} = order;
     const location = useLocation();
 
     const id = getId(location.pathname)
@@ -33,7 +33,7 @@ const OrderDetails = () => {
                     id={id}
                     customerId={customerId}
                     status={status}
-                    items={items}
+                    grossValue={grossValue}
                     orderDate={orderDate}
                     isLoading={isLoading}
                     errors={errors}

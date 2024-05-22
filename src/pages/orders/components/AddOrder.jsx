@@ -39,7 +39,7 @@ const AddOrder =
                                     min: 1
                                 })} />
                                 {errors.customerId && errors.customerId.type === "required" && (
-                                    <p className={styles.errorMsg}>Customer ID is required.</p>)}
+                                    <p className={styles.errorMsg}>Please Enter Customer ID!</p>)}
                                 {errors.customerId && errors.customerId.type === "min" && (
                                     <p className={styles.errorMsg}>Customer ID cannot be less than 1.</p>)}
                             </div>
@@ -53,21 +53,21 @@ const AddOrder =
                                 </select>
                             </div>
                             <div className={styles.createFormBox}>
-                                <label>Items: </label>
-                                <input type="text" name="items" {...register('items', {
+                                <label>Gross value: </label>
+                                <input defaultValue={0} type="text" name="grossValue" {...register('grossValue', {
                                     required: true,
-                                    minLength: 2
+                                    pattern: /^\d+(\.\d{1,2})?$/,
                                 })} />
-                                {errors.items && errors.items.type === "required" && (
-                                    <p className={styles.errorMsg}>Item is required.</p>)}
-                                {errors.items && errors.items.type === "minLength" && (
-                                    <p className={styles.errorMsg}>Item should be at-least 2 characters.</p>)}
+                                {errors.grossValue && errors.grossValue.type === "required" && (
+                                    <p className={styles.errorMsg}>Please Enter Gross Value!</p>)}
+                                {errors.grossValue && errors.grossValue.type === "pattern" && (
+                                    <p className={styles.errorMsg}>Gross Value Format Is Not Correct!</p>)}
                             </div>
                             <div className={styles.createFormBox}>
                                 <label>Order date: </label>
                                 <input type="date" name="orderDate" {...register('orderDate', {required: true})} />
                                 {errors.orderDate && errors.orderDate.type === "required" && (
-                                    <p className={styles.errorMsg}>Order date is required.</p>)}
+                                    <p className={styles.errorMsg}>Please Enter Order Date!</p>)}
                             </div>
                             <div className={styles.buttonBox}>
                                 <button

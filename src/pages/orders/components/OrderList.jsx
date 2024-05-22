@@ -31,7 +31,6 @@ import Button from "../../../components/Button";
 const columns = [
     {id: 'id', name: 'Id'},
     {id: 'status', name: 'Status'},
-    {id: 'totalProduct', name: 'Total product'},
     {id: 'orderDate', name: 'Order date'},
     {id: 'details', name: 'Details'},
     {id: 'action', name: 'Actions'},
@@ -110,7 +109,6 @@ const OrderList =
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}>
                                     <TableCell>{order.id}</TableCell>
                                     <TableCell>{order.status}</TableCell>
-                                    <TableCell>{order.totalProduct}</TableCell>
                                     <TableCell>{order.orderDate}</TableCell>
                                     <TableCell>
                                         <IconButton

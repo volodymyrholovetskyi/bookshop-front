@@ -1,28 +1,21 @@
 import React, {useState} from 'react'
-import {IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableRow} from "@mui/material";
+import {IconButton} from "@mui/material";
 import Loading from "../../../components/Loading";
-import TableHeads from "../../../components/TableHeads";
+import Card from "../../../components/Card";
 import Button from "../../../components/Button";
 import styles from '../styles/OrderDetails.module.css'
 import Error from "../../../components/icons/Error";
 import EditIcon from '@mui/icons-material/Edit'
 import UpdateOrder from "./UpdateOrder";
+import Typography from "../../../components/Typography";
 
-
-const columns = [
-    {id: 'id', name: 'Id'},
-    {id: 'status', name: 'Status'},
-    {id: 'totalProduct', name: 'Customer ID'},
-    {id: 'orderDate', name: 'Order date'},
-    {id: 'action', name: 'Items'},
-]
 const OrderInfo =
     ({
          id,
          customerId,
          status,
          orderDate,
-         items,
+         grossValue,
          isLoading,
          errors,
          title,
@@ -59,7 +52,7 @@ const OrderInfo =
                     onSubmit={handleSubmit}
                     customerId={customerId}
                     status={status}
-                    items={items}
+                    grossValue={grossValue}
                     orderDate={orderDate}
                     title={title}
                 ></UpdateOrder>}
@@ -73,21 +66,58 @@ const OrderInfo =
                     <IconButton onClick={handleClickEditMode}><EditIcon/></IconButton>
                 </div>}
                 {isLoading && <Loading/>}
-                {!isLoading && !open && <TableContainer component={Paper}>
-                    <h2>{title}</h2>
-                    <Table sx={{minWidth: 650}} size="small" aria-label="a dense table">
-                        <TableHeads columns={columns}></TableHeads>
-                        <TableBody>
-                            <TableRow key={id}>
-                                <TableCell>{id}</TableCell>
-                                <TableCell>{status}</TableCell>
-                                <TableCell>{customerId}</TableCell>
-                                <TableCell>{orderDate}</TableCell>
-                                <TableCell>{items && items.map((item) => item + " | ")}</TableCell>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                {!isLoading && !open &&
+                    <div style={{display: "flex", justifyContent: "center", marginTop: "50px"}}>
+                        <div>
+                            <Card>
+                                <Typography>
+                                    <div style={{padding:"20px 40px", fontSize:"20px"}}>
+                                        <h2>{title}</h2>
+                                        <div style={{
+                                            display: "flex",
+                                            justifyContent: "space-between",
+                                            alignItems: "center"
+                                        }}>
+                                            <label style={{fontWeight: "bold"}}>Order ID:</label>
+                                            <p>{id}</p>
+                                        </div>
+                                        <div style={{
+                                            display: "flex",
+                                            justifyContent: "space-between",
+                                            alignItems: "center"
+                                        }}>
+                                            <label style={{fontWeight: "bold"}}>Customer ID:</label>
+                                            <p>{customerId}</p>
+                                        </div>
+                                        <div style={{
+                                            display: "flex",
+                                            justifyContent: "space-between",
+                                            alignItems: "center"
+                                        }}>
+                                            <label style={{fontWeight: "bold"}}>Status:</label>
+                                            <p>{status}</p>
+                                        </div>
+                                        <div style={{
+                                            display: "flex",
+                                            justifyContent: "space-between",
+                                            alignItems: "center"
+                                        }}>
+                                            <label style={{fontWeight: "bold"}}>Gross Value:</label>
+                                            <p>{grossValue}</p>
+                                        </div>
+                                        <div style={{
+                                            display: "flex",
+                                            justifyContent: "space-between",
+                                            alignItems: "center"
+                                        }}>
+                                            <label style={{fontWeight: "bold"}}>Order Date:</label>
+                                            <p>{orderDate}</p>
+                                        </div>
+                                    </div>
+                                </Typography>
+                            </Card>
+                        </div>
+                    </div>
                 }
             </div>
         );
