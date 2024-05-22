@@ -1,11 +1,8 @@
 import React, {useState} from 'react';
 import {
-    Box,
     DialogActions,
     DialogTitle,
-    Fade,
     IconButton,
-    Modal,
     Paper,
     Table,
     TableBody,
@@ -13,7 +10,6 @@ import {
     TableContainer,
     TableRow,
 } from "@mui/material";
-import Backdrop from '@mui/material/Backdrop';
 import DeleteIcon from '@mui/icons-material/Delete'
 import PlagiarismOutlinedIcon from '@mui/icons-material/PlagiarismOutlined';
 import Loading from "../../../components/Loading";
@@ -23,6 +19,7 @@ import Dialog from "../../../components/Dialog";
 import styles from '../styles/OrderList.module.css'
 import Button from "../../../components/Button";
 import Typography from "../../../components/Typography";
+import Modals from "../../../components/Modals";
 
 const columns = [
     {id: 'id', name: 'Id'},
@@ -60,7 +57,6 @@ const OrderList =
                 modalDaly(setShowModal, 2000)
             }
         }
-        const handleClose = () => setShowModal(false)
 
         const handleClickOrderDetails = (pagePath) => {
             handleClickNavigation(pagePath)
@@ -68,6 +64,13 @@ const OrderList =
 
         return (
             <div>
+                <Modals
+                    open={showModal}
+                    title={"Success!"}
+                    daly={2000}
+                    setShowModal={setShowModal}
+                    description={`Order with ID: [ ${id} ] has bean deleted.`}
+                />
                 <TableContainer component={Paper}>
                     <Typography>
                         <div className={styles.headerBox}>
@@ -139,32 +142,10 @@ const OrderList =
                         handleChangeRowsPerPage={handleChangeRowsPerPage}
                     ></Pagination>
                 </TableContainer>
-                <Modal
-                    aria-labelledby="transition-modal-title"
-                    aria-describedby="transition-modal-description"
-                    open={showModal}
-                    onClose={handleClose}
-                    closeAfterTransition
-                    slots={{backdrop: Backdrop}}
-                    slotProps={{
-                        backdrop: {
-                            timeout: 500,
-                        },
-                    }}>
-                    <Fade in={showModal}>
-                        <Box className={styles.boxModal}>
-                            <Typography id="transition-modal-title" variant="h6" component="h2">
-                                Success!
-                            </Typography>
-                            <Typography id="transition-modal-description" sx={{mt: 2}}>
-                                Order with ID: [ {id} ] has bean deleted.
-                            </Typography>
-                        </Box>
-                    </Fade>
-                </Modal>
             </div>
         );
     }
+
 const modalDaly = (setShowModal, daly) => {
     const delay = setTimeout(() => {
         setShowModal(false);

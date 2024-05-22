@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useLocation, useNavigate} from "react-router-dom";
 import Typography from "../../../components/Typography";
-import Error from "../../../components/icons/Error";
 import {useDispatch, useSelector} from "react-redux";
 import OrderDetails from "../components/OrderDetails";
 import actionsOrders from "../actions/orderDetails"
@@ -11,29 +10,50 @@ import actionsAddOrder from "../actions/addOrder";
 import addOrder from "../actions/addOrder";
 import CreateOrder from "../components/CreateOrder";
 import UpdateOrder from "../components/UpdateOrder";
-import styles from "../styles/Order.module.css"
+import {Snackbar} from "@mui/material";
 
+const CREATE_ACTION = 'CREATE';
+const UPDATE_ACTION = 'UPDATE';
+const SUCCESS_MESSAGE = 'Success!'
+const FAILED_MESSAGE = 'Failed!'
+const DURATION = 5000;
 const Order = () => {
     const {formatMessage} = useIntl();
     const {order, isLoading, errors} = useSelector(orderDetails => orderDetails);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {customerId, status, orderDate, grossValue} = order;
+    const {customerId, status, orderDate, grossValue, id} = order;
     const [open, setOpen] = useState(false);
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [action, setAction] = useState('');
     const location = useLocation();
 
-    const id = getId(location.pathname)
+    const orderId = getId(location.pathname)
 
     const handleGoBack = () => navigate(-1)
 
-    const handleUpdateOrder = (order) => {
-        dispatch(actionsUpdateOrder.updateOrder(id, order))
-        handleGoBack()
-    }
-
     const handleCreateOrder = (order) => {
         dispatch(actionsAddOrder.createOrder(order))
-        handleGoBack()
+        responseProcessing(CREATE_ACTION, DURATION)
+    }
+    const handleUpdateOrder = (order) => {
+        dispatch(actionsUpdateOrder.updateOrder(orderId, order))
+        responseProcessing(UPDATE_ACTION, DURATION)
+        handleChangeMode()
+    }
+
+    const responseProcessing = (action, duration) => {
+        if (!errors.length){
+            setSuccess(true)
+            setOpenSnackbar(true)
+            setAction(action)
+            snackbarDelay(setOpenSnackbar, duration)
+        } else {
+            setOpenSnackbar(true)
+            setAction(action)
+            snackbarDelay(setOpenSnackbar, duration)
+        }
     }
 
     const handleChangeMode = () => {
@@ -45,37 +65,25 @@ const Order = () => {
     }
 
     useEffect(() => {
-        if (id !== "addOrder") {
-            dispatch(actionsOrders.fetchOrder(id))
+        if (orderId !== "addOrder") {
+            dispatch(actionsOrders.fetchOrder(orderId))
         }
     }, []);
 
-    if (errors.length) {
-        return (
-            <div className={styles.errorContainer}>
-                {errors.map((error) => (
-                    <div className={styles.errorBox}>
-                        <Error color="warning"></Error>
-                        <p className={styles.errorMessage}>{error.code}</p>
-                        <p className={styles.errorMessage}>{error.description}</p>
-                    </div>
-                ))}
-            </div>
-        )
-    }
-
     return (
         <Typography>
-            {id === "addOrder" ? <CreateOrder
+            {orderId === "addOrder" ? <CreateOrder
                     onSubmit={handleCreateOrder}
                     isLoading={isLoading}
+                    errors
+                    id={id}
                     fetchErrors={errors}
                     title={formatMessage({id: 'titleNewOrder'})}
                     handleCancel={handleGoBack}
                 />
                 : <>
                     {!open && <OrderDetails
-                        id={id}
+                        id={orderId}
                         customerId={customerId}
                         status={status}
                         grossValue={grossValue}
@@ -99,10 +107,27 @@ const Order = () => {
                     }
                 </>
             }
+            {success ? <Snackbar
+                open={openSnackbar}
+                message={SUCCESS_MESSAGE}
+                action={action}/>
+                : <Snackbar open={openSnackbar}
+                message={FAILED_MESSAGE}
+                action={action}/>
+            }
         </Typography>
     );
 }
 
 const getId = (pathname) => pathname.split('/').pop()
+
+const snackbarDelay = (setShowModal, duration) => {
+    const delay = setTimeout(() => {
+        setShowModal(false);
+    }, duration);
+
+    return () => clearTimeout(delay);
+}
+
 
 export default Order;

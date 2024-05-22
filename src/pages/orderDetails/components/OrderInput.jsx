@@ -1,7 +1,7 @@
 import React from "react";
 import {useForm} from "react-hook-form";
 import Loading from "../../../components/Loading";
-import styles from '../styles/CreateOrder.module.css'
+import styles from '../styles/OrderInput.module.css'
 import Typography from "../../../components/Typography";
 
 const statuses = [
@@ -19,7 +19,6 @@ const OrderInput =
          grossValue,
          orderDate,
          handleCancel,
-         status,
      }) => {
 
         const {register, handleSubmit, formState: {errors}} = useForm();
@@ -30,8 +29,8 @@ const OrderInput =
                     <h2 className={styles.title}>{title}</h2>
                     {isLoading && <Loading/>}
                     {!isLoading &&
-                        <form className={styles.createForm} onSubmit={handleSubmit(onSubmit)} onReset={handleCancel}>
-                            <div className={styles.createFormBox}>
+                        <form onSubmit={handleSubmit(onSubmit)} onReset={handleCancel}>
+                            <div className={styles.formBox}>
                                 <label>Customer ID: </label>
                                 <input type="number" defaultValue={customerId} {...register("customerId", {
                                     required: true,
@@ -42,7 +41,7 @@ const OrderInput =
                                 {errors.customerId && errors.customerId.type === "min" && (
                                     <p className={styles.errorMsg}>Customer ID cannot be less than 1.</p>)}
                             </div>
-                            <div className={styles.createFormBox}>
+                            <div className={styles.formBox}>
                                 <label>Select a Status: </label>
                                 <select name="status"{...register('status')}>
                                     {statuses.map(status =>
@@ -50,7 +49,7 @@ const OrderInput =
                                     )};
                                 </select>
                             </div>
-                            <div className={styles.createFormBox}>
+                            <div className={styles.formBox}>
                                 <label>Gross value: </label>
                                 <input defaultValue={grossValue} type="text"
                                        name="grossValue" {...register('grossValue', {
@@ -62,14 +61,14 @@ const OrderInput =
                                 {errors.grossValue && errors.grossValue.type === "pattern" && (
                                     <p className={styles.errorMsg}>Gross Value Format Is Not Correct!</p>)}
                             </div>
-                            <div className={styles.createFormBox}>
+                            <div className={styles.formBox}>
                                 <label>Order date: </label>
                                 <input type="date" defaultValue={orderDate}
                                        name="orderDate" {...register('orderDate', {required: true})} />
                                 {errors.orderDate && errors.orderDate.type === "required" && (
                                     <p className={styles.errorMsg}>Please Enter Order Date!</p>)}
                             </div>
-                            <div className={styles.buttonBox}>
+                            <div className={styles.buttonAction}>
                                 <button
                                     className={`${styles.btn} ${styles.createButton}`}
                                     type="submit">

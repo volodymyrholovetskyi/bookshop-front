@@ -26,7 +26,7 @@ const OrderDetails =
 
         return (
             <div>
-                <div className={styles.buttonBox}>
+                <div className={styles.buttonAction}>
                     <Button
                         className={styles.buttonGoBack}
                         variant="contained"

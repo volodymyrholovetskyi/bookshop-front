@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Typography from 'components/Typography';
 import OrderList from "../components/OrderList";
 import actionsOrders from "../actions/orderList"
@@ -27,6 +27,7 @@ function Orders() {
     const [ filterOrder, setFilterOrder ] = useLocalStorage("filterOrder", initFilterOrder);
     const { customerId, status, from, to } = filterOrder.search;
     const { pageNumber, size } = filterOrder;
+    const [open, setOpen] = useState(false);
     const navigate = useNavigate();
 
     const handleClickNavigation = (pagePath) => {
@@ -55,8 +56,12 @@ function Orders() {
         });
     }
 
-    const handleClickDeleteOrder = (id) => {
+    const handleDeleteOrder = (id) => {
         dispatch(actionsDeleteOrder.deleteOrder(id, filterOrder))
+    }
+
+    const handleOpenForm = () => {
+        setOpen(!open)
     }
 
     useEffect(() => {
@@ -70,18 +75,20 @@ function Orders() {
     return (
         <Typography>
             <OrderFilter
-                handleChangeSearch={handleChangeSearch}
+                onChangeSearch={handleChangeSearch}
+                handleOpenForm={handleOpenForm}
                 customerId={customerId}
                 status={status}
                 from={from}
                 to={to}
+                open={open}
             />
             <OrderList
                 title={formatMessage({id: 'title'})}
                 orders={list}
                 errors={errors}
                 isLoading={isLoading}
-                handleDeleteOrder={handleClickDeleteOrder}
+                handleDeleteOrder={handleDeleteOrder}
                 handleClickNavigation={handleClickNavigation}
                 totalOrders={totalOrders}
                 page={pageNumber}
@@ -92,5 +99,4 @@ function Orders() {
         </Typography>
     );
 }
-
 export default Orders;

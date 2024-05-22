@@ -1,4 +1,4 @@
-.buttonBox {
+.buttonAction {
     display: flex;
     justify-content: space-evenly;
 }
@@ -35,15 +35,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
     border-radius: 25px;
 }
 
-.createFormBox {
+.formBox {
     margin-bottom: 20px;
 }
 
-.createFormBox input, select {
+.formBox input, select {
     padding: 16px 20px;
     width: 100%;
     border: none;
@@ -52,14 +51,11 @@
     font-size: 16px;
 }
 
-.createFormBox label {
+.formBox label {
     font-weight: bold;
     display: inline-block;
     margin-bottom: 10px;
-}
-
-.createForm {
-    padding: 20px;
+    font-size: 18px;
 }
 
 .errorMsg {
@@ -68,4 +64,6 @@
 
 .title {
     text-align: center;
+    font-weight: bold;
+    font-size: 25px;
 }
