@@ -48,7 +48,7 @@ const OrderList =
      }) => {
         const [open, setOpen] = useState(false);
         const [showModal, setShowModal] = useState(false);
-        let id = 0;
+        const [id, setId] = useState(0);
         const handleClickCancelDelete = () => setOpen(false)
         const handleClickOpenDialog = () => setOpen(true)
 
@@ -105,7 +105,7 @@ const OrderList =
                                     <TableCell>
                                         <IconButton onClick={() => {
                                             handleClickOpenDialog()
-                                            this.id = order.id;
+                                            setId(order.id)
                                         }}>
                                             <DeleteIcon/>
                                         </IconButton>
