@@ -37,50 +37,30 @@ const OrderDetails =
                 </div>
                 {isLoading && <Loading/>}
                 {!isLoading &&
-                    <div style={{display: "flex", justifyContent: "center", marginTop: "50px"}}>
+                    <div className={styles.container}>
                         <div>
                             <Card>
                                 <Typography>
-                                    <div style={{padding: "20px 40px", fontSize: "20px"}}>
+                                    <div className={styles.box}>
                                         <h2>{title}</h2>
-                                        <div style={{
-                                            display: "flex",
-                                            justifyContent: "space-between",
-                                            alignItems: "center"
-                                        }}>
-                                            <label style={{fontWeight: "bold"}}>Order ID:</label>
+                                        <div className={styles.inputBox}>
+                                            <label>Order ID:</label>
                                             <p>{id}</p>
                                         </div>
-                                        <div style={{
-                                            display: "flex",
-                                            justifyContent: "space-between",
-                                            alignItems: "center"
-                                        }}>
-                                            <label style={{fontWeight: "bold"}}>Customer ID:</label>
+                                        <div className={styles.inputBox}>
+                                            <label>Customer ID:</label>
                                             <p>{customerId}</p>
                                         </div>
-                                        <div style={{
-                                            display: "flex",
-                                            justifyContent: "space-between",
-                                            alignItems: "center"
-                                        }}>
-                                            <label style={{fontWeight: "bold"}}>Status:</label>
+                                        <div className={styles.inputBox}>
+                                            <label>Status:</label>
                                             <p>{status}</p>
                                         </div>
-                                        <div style={{
-                                            display: "flex",
-                                            justifyContent: "space-between",
-                                            alignItems: "center"
-                                        }}>
-                                            <label style={{fontWeight: "bold"}}>Gross Value:</label>
+                                        <div className={styles.inputBox}>
+                                            <label>Gross Value:</label>
                                             <p>{grossValue}</p>
                                         </div>
-                                        <div style={{
-                                            display: "flex",
-                                            justifyContent: "space-between",
-                                            alignItems: "center"
-                                        }}>
-                                            <label style={{fontWeight: "bold"}}>Order Date:</label>
+                                        <div className={styles.inputBox}>
+                                            <label>Order Date:</label>
                                             <p>{orderDate}</p>
                                         </div>
                                     </div>
