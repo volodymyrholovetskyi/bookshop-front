@@ -18,7 +18,7 @@ const MOCK_USER_AUTH = {
   password: '21232f297a57a5a743894a0e4a801fc3' // admin
 }, MOCK_USER_AUTH_RESPONSE = {
   user: {
-    authorities: ['ENABLE_SEE_SECRET_PAGE', 'ENABLE_SEE_ORDER_PAGE'],
+    authorities: ['ENABLE_SEE_SECRET_PAGE', 'ENABLE_SEE_ORDER_PAGE', "ENABLE_SEE_ORDER_DETAILS_PAGE"],
     email: 'adminMail@gmail.com',
     firstName: 'Адмiнич',
     id: '123',

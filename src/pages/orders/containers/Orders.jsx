@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import useLocalStorage from "../../../misc/hooks/useLocalStorage";
 import {useIntl} from "react-intl";
 import {useNavigate} from "react-router-dom"
+import OrderFilter from "../components/OrderFilter";
 
 const initFilterOrder = {
     search: {
@@ -68,6 +69,13 @@ function Orders() {
 
     return (
         <Typography>
+            <OrderFilter
+                handleChangeSearch={handleChangeSearch}
+                customerId={customerId}
+                status={status}
+                from={from}
+                to={to}
+            />
             <OrderList
                 title={formatMessage({id: 'title'})}
                 orders={list}
@@ -75,11 +83,6 @@ function Orders() {
                 isLoading={isLoading}
                 handleDeleteOrder={handleClickDeleteOrder}
                 handleClickNavigation={handleClickNavigation}
-                handleChangeSearch={handleChangeSearch}
-                customerId={customerId}
-                status={status}
-                from={from}
-                to={to}
                 totalOrders={totalOrders}
                 page={pageNumber}
                 handleChangeRowsPerPage={handleChangeRowsPerPage}

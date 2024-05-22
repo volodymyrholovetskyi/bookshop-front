@@ -1,22 +1,22 @@
 import {
-    ERROR_ADD_ORDER,
-    REQUEST_ADD_ORDER,
-    RESPONSE_ADD_ORDER
+    ERROR_CREATE_ORDER,
+    REQUEST_CREATE_ORDER,
+    RESPONSE_CREATE_ORDER
 } from '../constans/actionType';
 import axios from "axios";
 import config from "../../../config";
 
 const requestAddOrder = () => ({
-    type: REQUEST_ADD_ORDER,
+    type: REQUEST_CREATE_ORDER,
 });
 const responseAddOrder = (res) => ({
     payload: res,
-    type: RESPONSE_ADD_ORDER,
+    type: RESPONSE_CREATE_ORDER,
 });
 
 const errorAddOrder = (errors) => ({
     payload: errors,
-    type: ERROR_ADD_ORDER,
+    type: ERROR_CREATE_ORDER,
 });
 
 const addOrder = (order) => {

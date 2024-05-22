@@ -25,10 +25,10 @@ const fetchAll = (search) => {
     return axios.post(`${ORDER_API_URL}/_list`, search);
 };
 
-export const fetchOrderList = (filter) => {
+export const fetchOrderList = (orderFilter) => {
     return dispatch => {
         dispatch(requestOrderList());
-        return fetchAll(filter)
+        return fetchAll(orderFilter)
             .then((res) => dispatch(receiveOrderList(res)))
             .catch((errors) => dispatch(errorReceiveOrderList(errors)))
     };

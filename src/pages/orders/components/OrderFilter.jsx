@@ -14,7 +14,7 @@ const OrderFilter = ({handleChangeSearch, customerId, status, from, to}) => {
     }
 
     return (
-        <>
+        <div>
             <IconButton onClick={handleClickOpenForm}><FilterListIcon></FilterListIcon></IconButton>
             {open && <div className={styles.filterFormContainer}>
                 <h2>Search by:</h2>
@@ -51,7 +51,7 @@ const OrderFilter = ({handleChangeSearch, customerId, status, from, to}) => {
                            onChange={onChangeSearch}/>
                 </div>
             </div>}
-        </>
+        </div>
     );
 }
 

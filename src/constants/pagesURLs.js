@@ -7,7 +7,6 @@ const result = {
   [pages.secretPage]: `${config.UI_URL_PREFIX}/${pages.secretPage}`,
   [pages.orderListPage]: `${config.UI_URL_PREFIX}/${pages.orderListPage}`,
   [pages.orderDetails]: `${config.UI_URL_PREFIX}/${pages.orderDetails}`,
-  [pages.addOrderPage]: `${config.UI_URL_PREFIX}/${pages.addOrderPage}`
 };
 
 export default result;

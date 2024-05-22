@@ -19,10 +19,6 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import PlagiarismOutlinedIcon from '@mui/icons-material/PlagiarismOutlined';
 import Loading from "../../../components/Loading";
 import TableHeads from "../../../components/TableHeads";
-import OrderFilter from "./OrderFilter";
-import pagesURLs from "../../../constants/pagesURLs";
-import * as pages from "../../../constants/pages";
-import AddIcon from "@mui/icons-material/Add";
 import Pagination from "../../../components/Pagination";
 import Dialog from "../../../components/Dialog";
 import styles from '../styles/OrderList.module.css'
@@ -49,15 +45,10 @@ const OrderList =
          handleChangePage,
          handleChangeRowsPerPage,
          totalOrders,
-         handleChangeSearch,
-         customerId,
-         status,
-         from,
-         to,
      }) => {
         const [open, setOpen] = useState(false);
         const [showModal, setShowModal] = useState(false);
-        const [id, setId] = useState(0);
+        let id = "addOrder";
         const handleClickCancelDelete = () => setOpen(false)
         const handleClickOpenDialog = () => setOpen(true)
 
@@ -78,25 +69,8 @@ const OrderList =
         return (
             <div>
                 <h2>{title}</h2>
-                <div className={styles.filterBox}>
-                    <div>
-                        <OrderFilter
-                            handleChangeSearch={handleChangeSearch}
-                            customerId={customerId}
-                            status={status}
-                            from={from}
-                            to={to}/>
-                    </div>
-                    <div>
-                        <Button
-                            onClick={(() => {
-                                handleClickNavigation(`${pagesURLs[pages.addOrderPage]}`)
-                            })}
-                            variant="outlined"
-                            startIcon={<AddIcon/>}>
-                            ADD ORDER</Button>
-                    </div>
-                </div>
+                <button onClick={(() => {handleClickNavigation(`/orders/${id}`)})}>
+                    add order</button>
                 {isLoading && <Loading/>}
                 {!isLoading && <TableContainer component={Paper}>
                     <Table sx={{minWidth: 650}} size="small" aria-label="a dense table">
@@ -121,7 +95,7 @@ const OrderList =
                                     <TableCell>
                                         <IconButton onClick={() => {
                                             handleClickOpenDialog()
-                                            setId(order.id)
+                                            this.id = order.id;
                                         }}>
                                             <DeleteIcon/>
                                         </IconButton>
@@ -131,7 +105,7 @@ const OrderList =
                                         aria-labelledby="alert-dialog-title"
                                         aria-describedby="alert-dialog-description">
                                         <DialogTitle id="alert-dialog-title">
-                                            {"Do you want to delete the Order?"}
+                                            {"Do you want to delete the Orders?"}
                                         </DialogTitle>
                                         {errors && errors.map((error) => (
                                             <DialogTitle>{error}</DialogTitle>

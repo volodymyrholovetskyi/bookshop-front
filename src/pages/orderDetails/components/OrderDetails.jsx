@@ -1,15 +1,13 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {IconButton} from "@mui/material";
 import Loading from "../../../components/Loading";
 import Card from "../../../components/Card";
 import Button from "../../../components/Button";
 import styles from '../styles/OrderDetails.module.css'
-import Error from "../../../components/icons/Error";
 import EditIcon from '@mui/icons-material/Edit'
-import UpdateOrder from "./UpdateOrder";
 import Typography from "../../../components/Typography";
 
-const OrderInfo =
+const OrderDetails =
     ({
          id,
          customerId,
@@ -17,61 +15,33 @@ const OrderInfo =
          orderDate,
          grossValue,
          isLoading,
-         errors,
          title,
-         handleClickGoBack,
-         handleUpdateOrder,
+         handleGoBack,
+         handleChangeMode,
      }) => {
-        const [open, setOpen] = useState(false);
 
-        const handleClickEditMode = () => {
-            setOpen(!open)
-        }
-
-        const handelCancel = () => {
-            setOpen(false)
-        }
-
-        const handleSubmit = (order) => handleUpdateOrder(id, order)
-
-        if (errors.length > 0) {
-            return (
-                <div>
-                    {errors.map((error) => (
-                        <Error color="warning">{error}</Error>
-                    ))}
-                </div>)
+        const handleClickChangeMode = () => {
+            handleChangeMode(!open)
         }
 
         return (
             <div>
-                {open && <UpdateOrder
-                    isLoading={isLoading}
-                    handleCancel={handelCancel}
-                    fetchErrors={errors}
-                    onSubmit={handleSubmit}
-                    customerId={customerId}
-                    status={status}
-                    grossValue={grossValue}
-                    orderDate={orderDate}
-                    title={title}
-                ></UpdateOrder>}
-                {!open && <div className={styles.buttonBox}>
+                <div className={styles.buttonBox}>
                     <Button
                         className={styles.buttonGoBack}
                         variant="contained"
-                        onClick={handleClickGoBack}>
+                        onClick={handleGoBack}>
                         GO BACK
                     </Button>
-                    <IconButton onClick={handleClickEditMode}><EditIcon/></IconButton>
-                </div>}
+                    <IconButton onClick={handleClickChangeMode}><EditIcon/></IconButton>
+                </div>
                 {isLoading && <Loading/>}
-                {!isLoading && !open &&
+                {!isLoading &&
                     <div style={{display: "flex", justifyContent: "center", marginTop: "50px"}}>
                         <div>
                             <Card>
                                 <Typography>
-                                    <div style={{padding:"20px 40px", fontSize:"20px"}}>
+                                    <div style={{padding: "20px 40px", fontSize: "20px"}}>
                                         <h2>{title}</h2>
                                         <div style={{
                                             display: "flex",
@@ -122,4 +92,5 @@ const OrderInfo =
             </div>
         );
     }
-export default OrderInfo;
+
+export default OrderDetails;

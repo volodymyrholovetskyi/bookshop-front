@@ -3,38 +3,36 @@ import {useForm} from "react-hook-form";
 import Loading from "../../../components/Loading";
 import styles from '../styles/CreateOrder.module.css'
 import Typography from "../../../components/Typography";
-import Error from "../../../components/icons/Error";
 
-const AddOrder =
+const UpdateOrder =
     ({
-         onSubmit,
          isLoading,
-         fetchErrors,
+         onSubmit,
+         customerId,
+         status,
+         orderDate,
+         grossValue,
          title,
-         handleCancel,
+         handleCancel
      }) => {
 
         const {register, handleSubmit, formState: {errors}} = useForm();
 
-        if (fetchErrors.length > 0) {
-            return (
-                <div>
-                    {errors.map((error) => (
-                        <Error color="warning">{error}</Error>
-                    ))}
-                </div>)
+        const handleClickCancel = () => {
+            handleCancel(false)
         }
 
         return (
             <Typography>
                 <div className={styles.container}>
-                    <h2 className={styles.title}>{title}</h2>
+                    <h2>{title}</h2>
                     {isLoading && <Loading/>}
                     {!isLoading &&
-                        <form className={styles.createForm} onSubmit={handleSubmit(onSubmit)} onReset={handleCancel}>
+                        <form className={styles.createForm} onSubmit={handleSubmit(onSubmit)}
+                              onReset={handleClickCancel}>
                             <div className={styles.createFormBox}>
                                 <label>Customer ID: </label>
-                                <input type="number" defaultValue={0} {...register("customerId", {
+                                <input type="number" defaultValue={customerId} {...register("customerId", {
                                     required: true,
                                     min: 1
                                 })} />
@@ -45,7 +43,7 @@ const AddOrder =
                             </div>
                             <div className={styles.createFormBox}>
                                 <label>Select a Status: </label>
-                                <select name="status"{...register('status')}>
+                                <select defaultValue={status} name="status"{...register('status')}>
                                     <option value={"NEW"}>NEW</option>
                                     <option value={"PAID"}>PAID</option>
                                     <option value={"SHIPPED"}>SHIPPED</option>
@@ -54,26 +52,28 @@ const AddOrder =
                             </div>
                             <div className={styles.createFormBox}>
                                 <label>Gross value: </label>
-                                <input defaultValue={0} type="text" name="grossValue" {...register('grossValue', {
+                                <input defaultValue={grossValue} type="text"
+                                       name="grossValue" {...register('grossValue', {
                                     required: true,
                                     pattern: /^\d+(\.\d{1,2})?$/,
                                 })} />
                                 {errors.grossValue && errors.grossValue.type === "required" && (
                                     <p className={styles.errorMsg}>Please Enter Gross Value!</p>)}
                                 {errors.grossValue && errors.grossValue.type === "pattern" && (
-                                    <p className={styles.errorMsg}>Gross Value Format Is Not Correct!</p>)}
+                                    <p className={styles.errorMsg}>Please Enter A Valid Gross Value!</p>)}
                             </div>
                             <div className={styles.createFormBox}>
                                 <label>Order date: </label>
-                                <input type="date" name="orderDate" {...register('orderDate', {required: true})} />
+                                <input type="date" defaultValue={orderDate}
+                                       name="orderDate" {...register('orderDate', {required: true})} />
                                 {errors.orderDate && errors.orderDate.type === "required" && (
-                                    <p className={styles.errorMsg}>Please Enter Order Date!</p>)}
+                                    <p className={styles.errorMsg}>Please Enter Order Date!.</p>)}
                             </div>
                             <div className={styles.buttonBox}>
                                 <button
                                     className={`${styles.btn} ${styles.createButton}`}
                                     type="submit">
-                                    create
+                                    update
                                 </button>
                                 <button
                                     className={`${styles.btn} ${styles.cancelButton}`}
@@ -88,4 +88,4 @@ const AddOrder =
         );
     }
 
-export default AddOrder;
+export default UpdateOrder;
