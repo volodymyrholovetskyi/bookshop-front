@@ -16,7 +16,7 @@ const CREATE_ACTION = 'CREATE';
 const UPDATE_ACTION = 'UPDATE';
 const SUCCESS_MESSAGE = 'Success!'
 const FAILED_MESSAGE = 'Failed!'
-const DURATION = 5000;
+const DURATION = 2000;
 const Order = () => {
     const {formatMessage} = useIntl();
     const {order, isLoading, errors} = useSelector(orderDetails => orderDetails);
@@ -36,11 +36,12 @@ const Order = () => {
     const handleCreateOrder = (order) => {
         dispatch(actionsAddOrder.createOrder(order))
         responseProcessing(CREATE_ACTION, DURATION)
+        setTimeout(() => handleGoBack(), DURATION)
     }
     const handleUpdateOrder = (order) => {
         dispatch(actionsUpdateOrder.updateOrder(orderId, order))
         responseProcessing(UPDATE_ACTION, DURATION)
-        handleChangeMode()
+        setTimeout(() => handleChangeMode(), DURATION)
     }
 
     const responseProcessing = (action, duration) => {
