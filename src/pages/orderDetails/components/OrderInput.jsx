@@ -3,13 +3,7 @@ import {useForm} from "react-hook-form";
 import Loading from "../../../components/Loading";
 import styles from '../styles/OrderInput.module.css'
 import Typography from "../../../components/Typography";
-
-const statuses = [
-    {key: "new", value: "NEW"},
-    {key: "paid", value: "PAID"},
-    {key: "shipped", value: "SHIPPED"},
-    {key: "canceled", value: "CANCELED"},
-]
+import {statuses} from "../../../constants/ statuses";
 const OrderInput =
     ({
          onSubmit,
@@ -19,6 +13,7 @@ const OrderInput =
          grossValue,
          orderDate,
          handleCancel,
+        status,
      }) => {
 
         const {register, handleSubmit, formState: {errors}} = useForm();
@@ -43,7 +38,7 @@ const OrderInput =
                             </div>
                             <div className={styles.formBox}>
                                 <label>Select a Status: </label>
-                                <select name="status"{...register('status')}>
+                                <select value={status} name="status"{...register('status')}>
                                     {statuses.map(status =>
                                         <option key={status.key} value={status.value}>{status.value}</option>
                                     )};

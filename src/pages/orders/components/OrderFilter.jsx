@@ -2,7 +2,7 @@ import React from "react";
 import FilterListIcon from '@mui/icons-material/FilterList';
 import styles from '../styles/OrderFilter.module.css'
 import {IconButton} from "@mui/material";
-
+import {statuses} from "../../../constants/ statuses";
 const OrderFilter =
     ({
          onChangeSearch,
@@ -16,7 +16,9 @@ const OrderFilter =
 
         return (
             <div>
-                <IconButton onClick={handleOpenForm}><FilterListIcon></FilterListIcon></IconButton>
+                <IconButton onClick={handleOpenForm}>
+                    <FilterListIcon></FilterListIcon>
+                </IconButton>
                 {open && <div className={styles.container}>
                     <h2>Search by:</h2>
                     <div className={styles.formBox}>
@@ -31,10 +33,9 @@ const OrderFilter =
                         <select name="status"
                                 value={status}
                                 onChange={onChangeSearch}>
-                            <option value={"NEW"}>NEW</option>
-                            <option value={"PAID"}>PAID</option>
-                            <option value={"SHIPPED"}>SHIPPED</option>
-                            <option value={"CANCELED"}>CANCELED</option>
+                            {statuses.map(status =>
+                                <option key={status.key} value={status.value}>{status.value}</option>
+                            )};
                         </select>
                     </div>
                     <div className={styles.formBox}>
