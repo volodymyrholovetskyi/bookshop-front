@@ -11,12 +11,14 @@ import addOrder from "../actions/addOrder";
 import CreateOrder from "../components/CreateOrder";
 import UpdateOrder from "../components/UpdateOrder";
 import {Snackbar} from "@mui/material";
+import {
+    CREATE_ACTION,
+    UPDATE_ACTION,
+    SUCCESS_MESSAGE,
+    FAILED_MESSAGE,
+    DURATION,
+} from "../constans/orderSnackbar";
 
-const CREATE_ACTION = 'CREATE';
-const UPDATE_ACTION = 'UPDATE';
-const SUCCESS_MESSAGE = 'Success!'
-const FAILED_MESSAGE = 'Failed!'
-const DURATION = 2000;
 const Order = () => {
     const {formatMessage} = useIntl();
     const {order, isLoading, errors} = useSelector(orderDetails => orderDetails);
