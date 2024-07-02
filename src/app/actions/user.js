@@ -157,7 +157,8 @@ const MOCK_USER_AUTH = {
         return Promise.reject(err);
       })
       .then(user => dispatch(receiveUser(user)))
-      .catch(() => dispatch(fetchSignOut()));
+    .catch(() => dispatch(fetchSignOut()));
+  
 }, exportFunctions = {
   fetchRefreshToken,
   fetchSignIn,
