@@ -21,7 +21,7 @@ const OrderDetails =
      }) => {
 
         const handleClickChangeMode = () => {
-            handleChangeMode(!open)
+            handleChangeMode();
         }
 
         return (
